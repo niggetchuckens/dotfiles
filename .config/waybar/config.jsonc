@@ -14,7 +14,6 @@
     ],
     "modules-right": [
         "tray",
-        "custom/media",
         "pulseaudio",
         "network",
         "backlight",
