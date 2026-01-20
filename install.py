@@ -45,13 +45,14 @@ def run_command(cmd, shell=True):
         print_error(f"Command failed: {cmd}")
         sys.exit(1)
 
-def main():
+def main(confirm:str = None):
     print(f"\n{YELLOW}╔════════════════════════════════════════════╗{NC}")
     print(f"{YELLOW}║   Hyprland Python Installer                ║{NC}")
     print(f"{YELLOW}╚════════════════════════════════════════════╝{NC}\n")
 
     # Confirmation
-    confirm = input(f"{YELLOW}Do you want to proceed with the installation? [y/N]: {NC}")
+    if confirm is None:
+        confirm = input(f"{YELLOW}[?]{NC} This will install Hyprland and related packages. Continue? (y/N): ")
     if confirm.lower() != 'y':
         print_info("Installation cancelled")
         return
@@ -59,12 +60,12 @@ def main():
     distro, id_like = get_distro()
     # 1. Install Full Package Lists
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
-        pkgs = ("hyprland sddm waybar kitty rofi-wayland pulseaudio pavucontrol "
+        pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
                 "pipewire pipewire-pulse wireplumber dunst polkit-kde-agent "
                 "qt5-wayland qt6-wayland xdg-desktop-portal-hyprland grim slurp "
                 "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
                 "bluez bluez-utils blueman thunar neofetch htop btop neovim git curl "
-                "wget unzip zip tar gzip firefox noto-fonts noto-fonts-emoji "
+                "wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
                 "ttf-font-awesome ttf-jetbrains-mono-nerd docker")
         run("yay -Syu --noconfirm")
         run(f"yay -S --needed --noconfirm {pkgs}")
@@ -73,8 +74,8 @@ def main():
         pkgs = ("sddm pulseaudio pavucontrol pipewire pipewire-pulse wireplumber "
                 "dunst rofi kitty grim slurp wl-clipboard swaylock swayidle "
                 "brightnessctl network-manager-gnome bluez blueman thunar neofetch "
-                "htop neovim git curl wget unzip zip tar gzip firefox fonts-noto "
-                "fonts-noto-color-emoji fonts-font-awesome docker.io")
+                "htop neovim git curl wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
+                "fonts-font-awesome docker.io")
         run("sudo apt update && sudo apt install -y " + pkgs)
 
     elif distro == 'fedora':
@@ -83,7 +84,7 @@ def main():
                 "qt5-qtwayland qt6-qtwayland xdg-desktop-portal-hyprland grim slurp "
                 "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
                 "bluez bluez-tools blueman thunar neofetch htop btop neovim git curl "
-                "wget unzip zip tar gzip firefox google-noto-fonts google-noto-emoji-fonts "
+                "wget unzip zip tar gzip google-noto-fonts google-noto-emoji-fonts "
                 "fontawesome-fonts jetbrains-mono-fonts docker")
         run(f"sudo dnf install -y {pkgs}")
 
@@ -104,8 +105,15 @@ def main():
 
     print(f"{GREEN}[SUCCESS]{NC} Setup complete! Please reboot.")
 
-if __name__ == "__main__":
+if __name__ == "__main__": 
+    import argparse
+
     if os.geteuid() == 0:
         print_error("Please do not run this script as root (use sudo within the script instead)")
         sys.exit(1)
-    main()
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-y", "--yes", action="store_true", help="Skip confirmation")
+    args = parser.parse_args()
+
+    main(confirm='y' if args.yes else None)

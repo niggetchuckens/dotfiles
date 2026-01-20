@@ -1,0 +1,33 @@
+{
+    "apps": [
+        {
+            "auto-detach": true,
+            "cmd": "",
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "/home/hime/.config/sunshine/icons/desktop.png",
+            "name": "Desktop",
+            "prep-cmd": [
+                {
+                    "do": "/home/hime/.config/sunshine/scripts/ipad_start.sh",
+                    "undo": "/home/hime/.config/sunshine/scripts/ipad_end.sh"
+                }
+            ],
+            "wait-all": true
+        },
+        {
+            "cmd": "code /home/hime/code",
+            "image-path": "/home/hime/.config/sunshine/icons/vscode.png",
+            "name": "Visual studio code",
+            "prep-cmd": [
+                {
+                    "do": "",
+                    "undo": "setsid steam steam://close/bigpicture"
+                }
+            ]
+        }
+    ],
+    "env": {
+        "PATH": "$(PATH):$(HOME)/.local/bin"
+    }
+}
