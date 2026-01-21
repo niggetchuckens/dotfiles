@@ -45,14 +45,13 @@ def run_command(cmd, shell=True):
         print_error(f"Command failed: {cmd}")
         sys.exit(1)
 
-def main(confirm:str = None):
+def main():
     print(f"\n{YELLOW}╔════════════════════════════════════════════╗{NC}")
     print(f"{YELLOW}║   Hyprland Python Installer                ║{NC}")
     print(f"{YELLOW}╚════════════════════════════════════════════╝{NC}\n")
 
     # Confirmation
-    if confirm is None:
-        confirm = input(f"{YELLOW}[?]{NC} This will install Hyprland and related packages. Continue? (y/N): ")
+    confirm = input(f"{YELLOW}[?]{NC} This will install Hyprland and related packages. Continue? (y/N): ")
     if confirm.lower() != 'y':
         print_info("Installation cancelled")
         return
@@ -66,7 +65,7 @@ def main(confirm:str = None):
                 "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
                 "bluez bluez-utils blueman thunar neofetch htop btop neovim git curl "
                 "wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
-                "ttf-font-awesome ttf-jetbrains-mono-nerd docker")
+                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone cpupower github-copilot-cli nodejs npm")
         run("yay -Syu --noconfirm")
         run(f"yay -S --needed --noconfirm {pkgs}")
 
@@ -95,6 +94,8 @@ def main(confirm:str = None):
     
     copy_folder(".config")
     copy_folder(".local")
+    copy_folder(".scripts")
+    copy_folder("oh-my-posh")
 
     # 3. Enable Services
     for service in ["sddm", "bluetooth", "NetworkManager", "docker"]:
@@ -106,14 +107,9 @@ def main(confirm:str = None):
     print(f"{GREEN}[SUCCESS]{NC} Setup complete! Please reboot.")
 
 if __name__ == "__main__": 
-    import argparse
 
     if os.geteuid() == 0:
         print_error("Please do not run this script as root (use sudo within the script instead)")
         sys.exit(1)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-y", "--yes", action="store_true", help="Skip confirmation")
-    args = parser.parse_args()
-
-    main(confirm='y' if args.yes else None)
+    main()
