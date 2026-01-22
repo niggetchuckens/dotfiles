@@ -27,7 +27,7 @@
 ![Terminal](screenshots/terminal.png)
 
 ### Waybar 
-![Waybar](screenshots/desktop.png)
+![Waybar](screenshots/waybar.png)
 
 ### Neovim
 ![Neovim](screenshots/neovim.png)
