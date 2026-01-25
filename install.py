@@ -30,6 +30,31 @@ def copy_folder(src_name):
     else:
         print(f"{YELLOW}[WARN]{NC} Source {src_name} not found.")
 
+def build_hyprland_debian():
+    """Builds Hyprland from source for Debian users."""
+    print_info("Building Hyprland from source for Debian...")
+    # Essential build dependencies for Debian
+    build_deps = ("meson wget build-essential ninja-build cmake gettext gettext-base "
+                  "fontconfig libfontconfig-dev libffi-dev libxml2-dev libdrm-dev "
+                  "libxkbcommon-dev libpixman-1-dev libudev-dev libgbm-dev "
+                  "libinput-dev libwayland-dev wayland-protocols libdisplay-info-dev "
+                  "libhwdata-dev libavutil-dev libavcodec-dev libavformat-dev "
+                  "libswscale-dev libliftoff-dev libseat-dev libxcb-composite0-dev "
+                  "libxcb-dri3-dev libxcb-present-dev libxcb-render0-dev "
+                  "libxcb-res0-dev libxcb-shm0-dev libxcb-terminate0-dev "
+                  "libxcb-xfixes0-dev libxcb-xkb-dev libxcb-xinput-dev libxcb-util-dev")
+    run(f"sudo apt install -y {build_deps}")
+
+    # Build and install Hyprland
+    build_dir = os.path.expanduser("~/hyprland_build")
+    if os.path.exists(build_dir):
+        shutil.rmtree(build_dir)
+    os.makedirs(build_dir)
+    
+    run(f"git clone --recursive https://github.com/hyprwm/Hyprland {build_dir}")
+    run(f"cd {build_dir} && make all && sudo make install")
+    print_success("Hyprland built and installed successfully.")
+
 def get_distro():
     info = {}
     try:
@@ -43,13 +68,13 @@ def get_distro():
     return info.get("ID", ""), info.get("ID_LIKE", "").split()
 
 def main(confirm: str = None):
-    # Splash screen updated to YukiOS
+    # YukiOS Splash Screen
     print(f"\n{BLUE}╔════════════════════════════════════════════╗{NC}")
     print(f"{BLUE}║           YukiOS dotfiles installer        ║{NC}")
     print(f"{BLUE}╚════════════════════════════════════════════╝{NC}\n")
 
     if confirm is None:
-        confirm = input(f"{YELLOW}[?]{NC} Do you want to proceed with the installation? [y/N]: ")
+        confirm = input(f"{YELLOW}[?]{NC} Do you want to proceed? [y/N]: ")
     if confirm.lower() != 'y':
         print_info("Installation cancelled.")
         return
@@ -58,8 +83,6 @@ def main(confirm: str = None):
 
     # --- 1. Package Installation ---
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
-        print_info("Arch-based system detected. Using yay...")
-        # amd-ucode removed as per instructions. pulseaudio removed to avoid conflict.
         pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
                 "pipewire pipewire-pulse pipewire-jack wireplumber dunst "
                 "polkit-kde-agent qt5-wayland qt6-wayland xdg-desktop-portal-hyprland "
@@ -71,51 +94,41 @@ def main(confirm: str = None):
         run(f"yay -S --needed --noconfirm {pkgs}")
 
     elif distro in ['debian', 'ubuntu', 'pop', 'trixie'] or 'debian' in id_like:
-        print_info("Debian-based system detected. Using apt...")
-        # Fixed font names for Trixie and replaced neofetch with fastfetch.
-        pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
-                "pipewire pipewire-audio-client-libraries pipewire-pulse wireplumber "
-                "dunst polkit-kde-agent fonts-noto-core fonts-noto-color-emoji "
-                "fonts-font-awesome fonts-jetbrains-mono xdg-desktop-portal-hyprland "
-                "grim slurp wl-clipboard swaylock swayidle brightnessctl "
-                "bluez blueman thunar fastfetch htop btop neovim git docker.io "
-                "nvidia-driver libva-wayland2")
-        run("sudo apt update && sudo apt install -y " + pkgs)
+        print_info("Debian system detected. Enabling non-free repos and building Hyprland...")
+        run("sudo apt-get install -y software-properties-common")
+        run("sudo apt-add-repository non-free-firmware contrib non-free -y")
+        run("sudo apt update")
+        
+        pkgs = ("sddm waybar kitty pavucontrol pipewire pipewire-pulse wireplumber "
+                "dunst fonts-noto-core fonts-noto-color-emoji fonts-font-awesome "
+                "fonts-jetbrains-mono grim slurp wl-clipboard swaylock swayidle "
+                "brightnessctl bluez blueman thunar fastfetch htop btop neovim git "
+                "docker.io nvidia-driver libva-wayland2")
+        run("sudo apt install -y " + pkgs)
+        
+        # Build Hyprland since it's missing from Trixie repos
+        build_hyprland_debian()
 
-    elif distro in ['fedora'] or 'fedora' in id_like:
-        print_info("Fedora system detected. Using dnf...")
-        pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
-                "pipewire pipewire-pulseaudio wireplumber dunst polkit-kde "
-                "qt5-qtwayland qt6-qtwayland xdg-desktop-portal-hyprland grim slurp "
-                "wl-clipboard swaylock swayidle brightnessctl bluez blueman "
-                "thunar fastfetch htop btop neovim git google-noto-fonts "
-                "google-noto-emoji-fonts fontawesome-fonts jetbrains-mono-fonts docker")
-        run(f"sudo dnf install -y {pkgs}")
-
-    # --- 2. Hardware / NVIDIA Environment Variables ---
-    print_info("Configuring NVIDIA/Wayland environment variables...")
-    env_fixes = [
-        '\n# YukiOS Hardware Fixes\n',
-        'export LIBVA_DRIVER_NAME=nvidia\n',
-        'export XDG_SESSION_TYPE=wayland\n',
-        'export GBM_BACKEND=nvidia-drm\n',
-        'export __GLX_VENDOR_LIBRARY_NAME=nvidia\n',
-        'export WLR_NO_HARDWARE_CURSORS=1\n',
-        'alias neofetch="fastfetch"\n'
-    ]
-    bashrc_path = os.path.expanduser("~/.bashrc")
-    with open(bashrc_path, "a") as f:
-        f.writelines(env_fixes)
-
-    # --- 3. Deploy Dotfiles ---
-    print(f"{BLUE}[INFO]{NC} Deploying dotfiles...")
-    os.makedirs(os.path.expanduser("~/.config"), exist_ok=True) 
-    os.makedirs(os.path.expanduser("~/.local"), exist_ok=True)  
+    # --- 2. Copy Dotfiles ---
+    print_info("Deploying dotfiles...")
+    os.makedirs(os.path.expanduser("~/.config"), exist_ok=True)
+    os.makedirs(os.path.expanduser("~/.local"), exist_ok=True)
     os.makedirs(os.path.expanduser("~/.scripts"), exist_ok=True) 
 
-    copy_folder(".config") 
-    copy_folder(".local")  
-    copy_folder(".scripts") 
+    copy_folder(".config")
+    copy_folder(".local")
+    copy_folder(".scripts")
+
+    # --- 3. Hardware Fixes & Alias ---
+    bashrc_path = os.path.expanduser("~/.bashrc")
+    with open(bashrc_path, "a") as f:
+        f.write('\n# YukiOS Hardware Fixes\n')
+        f.write('export LIBVA_DRIVER_NAME=nvidia\n')
+        f.write('export XDG_SESSION_TYPE=wayland\n')
+        f.write('export GBM_BACKEND=nvidia-drm\n')
+        f.write('export __GLX_VENDOR_LIBRARY_NAME=nvidia\n')
+        f.write('export WLR_NO_HARDWARE_CURSORS=1\n')
+        f.write('alias neofetch="fastfetch"\n')
 
     # --- 4. Enable Services ---
     for service in ["sddm", "bluetooth", "docker"]:
@@ -124,14 +137,14 @@ def main(confirm: str = None):
         except:
             pass
 
-    print_success("YukiOS setup complete! Please reboot your system.")
+    print_success("YukiOS setup complete! Please reboot.")
 
 if __name__ == "__main__":
     if os.geteuid() == 0:
-        print_error("Do not run this script as root. It uses sudo/yay internally.")
+        print_error("Do not run as root. The script uses sudo internally.")
         sys.exit(1)
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-y", "--yes", action="store_true", help="Skip confirmation")
+    parser.add_argument("-y", "--yes", action="store_true")
     args = parser.parse_args()
     main(confirm='y' if args.yes else None)
