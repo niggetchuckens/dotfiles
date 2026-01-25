@@ -65,17 +65,19 @@ def main():
                 "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
                 "bluez bluez-utils blueman thunar neofetch htop btop neovim git curl "
                 "wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
-                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone cpupower github-copilot-cli nodejs npm")
-        run("yay -Syu --noconfirm")
-        run(f"yay -S --needed --noconfirm {pkgs}")
-
+                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone github-copilot-cli nodejs npm")
+        run_command("yay -Syu --noconfirm")
+        run_command(f"yay -S --needed --noconfirm {pkgs}")
+        run_command("curl -fsSL https://gh.io/copilot-install | bash")
+        run_command("export PATH=\"$PATH:/home/hime/.local/bin\"")
+    
     elif distro in ['ubuntu', 'debian', 'pop'] or 'debian' in id_like:
         pkgs = ("sddm pulseaudio pavucontrol pipewire pipewire-pulse wireplumber "
                 "dunst rofi kitty grim slurp wl-clipboard swaylock swayidle "
                 "brightnessctl network-manager-gnome bluez blueman thunar neofetch "
                 "htop neovim git curl wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
                 "fonts-font-awesome docker.io")
-        run("sudo apt update && sudo apt install -y " + pkgs)
+        run_command("sudo apt update && sudo apt install -y " + pkgs)
 
     elif distro == 'fedora':
         pkgs = ("hyprland sddm waybar kitty rofi-wayland pulseaudio pavucontrol "
@@ -85,7 +87,7 @@ def main():
                 "bluez bluez-tools blueman thunar neofetch htop btop neovim git curl "
                 "wget unzip zip tar gzip google-noto-fonts google-noto-emoji-fonts "
                 "fontawesome-fonts jetbrains-mono-fonts docker")
-        run(f"sudo dnf install -y {pkgs}")
+        run_command(f"sudo dnf install -y {pkgs}")
 
     # 2. Copy Dotfiles
     print(f"{BLUE}[INFO]{NC} Deploying dotfiles...")
@@ -100,7 +102,7 @@ def main():
     # 3. Enable Services
     for service in ["sddm", "bluetooth", "NetworkManager", "docker"]:
         try:
-            run(f"sudo systemctl enable {service}.service")
+            run_command(f"sudo systemctl enable {service}.service")
         except:
             pass
 

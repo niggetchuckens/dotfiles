@@ -4,10 +4,19 @@
     "position": "top",
     "height": 30,
     "spacing": 4,
-    "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "backlight", "battery", "custom/power"],
-
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+    "modules-center": [
+        "clock"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "backlight",
+        "battery",
+        "custom/power"
+    ],
     "hyprland/workspaces": {
         "format": "{icon}",
         "persistent-workspaces": {
@@ -15,46 +24,65 @@
             "HDMI-A-1": 1
         },
         "format-icons": {
-            "active": "󰮯", // Your Pac-Man icon [cite: 3]
-            "empty": "○",
-            "default": "󰊠"
+            "active": "\udb82\udfaf",
+            "empty": "\u25cb",
+            "default": "\udb80\udea0"
         }
     },
-
     "clock": {
         "format": "{:%I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
-
     "pulseaudio": {
         "format": "{volume}% {icon}",
         "format-icons": {
-            "default": ["", "", ""]
+            "default": [
+                "\uf026",
+                "\uf027",
+                "\uf028"
+            ]
         },
         "on-click": "pavucontrol"
     },
-
     "network": {
-        "format-wifi": " {signalStrength}%",
-        "format-disconnected": "Disconnected ⚠"
+        "format-wifi": "{icon} {signalStrength}%",
+        "format-ethernet": "\udb80\ude00 {ipaddr}",
+        "format-disconnected": "Disconnected \u26a0",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n\udb82\ude5f {ipaddr}/{cidr}\n\udb81\udf92 {gwaddr}",
+        "tooltip-format-ethernet": "\udb80\ude00 {ipaddr}/{cidr}\n\udb81\udf92 {gwaddr}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "nm-connection-editor"
     },
-
     "backlight": {
         "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format-icons": [
+            "\ue38d",
+            "\ue3d3",
+            "\ue3d1",
+            "\ue3cf",
+            "\ue3ce",
+            "\ue3cd",
+            "\ue3ca",
+            "\ue3c8",
+            "\ue39b"
+        ]
     },
-
     "battery": {
         "states": {
             "warning": 30,
             "critical": 15
         },
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": [
+            "\uf244",
+            "\uf243",
+            "\uf242",
+            "\uf241",
+            "\uf240"
+        ]
     },
-
     "custom/power": {
-        "format": "⏻",
+        "format": "\u23fb",
         "on-click": "wlogout",
         "tooltip": false
     }

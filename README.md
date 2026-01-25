@@ -143,7 +143,7 @@ All configuration files are modular and well-commented. Feel free to:
 | Keybinding | Action |
 |------------|--------|
 | `ALT + Return` | Open terminal |
-| `ALT + D` | Launch Rofi |
+| `ALT + W` | Launch Rofi |
 | `ALT + Q` | Close window |
 | `ALT + F` | Toggle fullscreen |
 | `ALT + [1-9]` | Switch workspace |
@@ -180,9 +180,6 @@ sudo systemctl enable sddm
 sudo systemctl start sddm
 ```
 
-## 🤝 Contributing
-
-Feel free to fork, modify, and submit pull requests. Suggestions and improvements are always welcome!
 
 ## 🙏 Credits
 
