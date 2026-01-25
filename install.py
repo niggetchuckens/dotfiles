@@ -44,16 +44,15 @@ def run_command(cmd, shell=True):
         print_error(f"Command failed: {cmd}")
         sys.exit(1)
 
-def main():
-    print(f"\n{YELLOW}╔════════════════════════════════════════════╗{NC}")
-    print(f"{YELLOW}║   Hyprland Python Installer                ║{NC}")
-    print(f"{YELLOW}╚════════════════════════════════════════════╝{NC}\n")
+def main(confirm = None):
+    # YukiOS Splash Screen
+    print(f"\n{BLUE}╔════════════════════════════════════════════╗{NC}")
+    print(f"{BLUE}║           YukiOS dotfiles installer        ║{NC}")
+    print(f"{BLUE}╚════════════════════════════════════════════╝{NC}\n")
 
-    # Confirmation
-    confirm = input(f"{YELLOW}[?]{NC} This will install Hyprland and related packages. Continue? (y/N): ")
-    if confirm.lower() != 'y':
-        print_info("Installation cancelled")
-        return
+    if confirm is None:
+        confirm = input(f"{YELLOW}[?]{NC} Proceed with installation? [y/N]: ")
+    if confirm.lower() != 'y': return
     
     distro, id_like = get_distro()
   
