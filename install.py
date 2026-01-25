@@ -74,11 +74,11 @@ def main():
     elif distro in ['ubuntu', 'debian', 'pop'] or 'debian' in id_like:
         pkgs = ("sddm pulseaudio pavucontrol pipewire pipewire-pulse wireplumber "
                 "dunst rofi kitty grim slurp wl-clipboard swaylock swayidle "
-                "brightnessctl network-manager-gnome bluez blueman thunar neofetch "
-                "htop neovim git curl wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
-                "fonts-font-awesome docker.io")
-        run_command("sudo apt update && sudo apt install -y " + pkgs)
-
+                "brightnessctl network-manager-gnome bluez blueman thunar fastfetch "
+                "htop neovim git curl wget unzip zip tar gzip fonts-noto-core "
+                "fonts-noto-color-emoji fonts-font-awesome docker.io")
+        run("sudo apt update && sudo apt install -y " + pkgs)
+        
     elif distro == 'fedora':
         pkgs = ("hyprland sddm waybar kitty rofi-wayland pulseaudio pavucontrol "
                 "pipewire pipewire-pulseaudio wireplumber dunst polkit-kde "
