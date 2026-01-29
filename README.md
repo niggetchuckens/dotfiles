@@ -35,7 +35,7 @@
 ## 🖥️ Supported Distributions
 
 - **Arch Linux** (and derivatives: Manjaro, EndeavourOS)
-- **Ubuntu** / **Debian** (and derivatives: Pop! OS)
+- **Ubuntu** / **Kali** / **Mint** (and derivatives: Pop! OS)
 - **Fedora**
 
 ## 📦 What Gets Installed
@@ -74,7 +74,7 @@
 ### Quick Install
 
 ```bash
-git clone https://github.com/yourusername/dotfiles.git
+git clone https://github.com/niggetchuckens/dotfiles.git
 cd dotfiles
 chmod +x install.sh
 ./install.sh
