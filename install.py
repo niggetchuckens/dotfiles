@@ -59,26 +59,37 @@ def main(confirm = None):
     # --- 1. Distro Specific Setup ---
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
         pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
-                "pipewire pipewire-pulse wireplumber dunst polkit-kde-agent "
+                "pipewire pipewire-pulse wireplumber neovim dunst polkit-kde-agent "
                 "qt5-wayland qt6-wayland xdg-desktop-portal-hyprland grim slurp "
                 "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
-                "bluez bluez-utils blueman thunar neofetch htop btop neovim git curl "
+                "bluez bluez-utils blueman thunar fastfetch htop btop neovim git curl "
                 "wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
-                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone github-copilot-cli nodejs npm")
+                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone"
+                "nodejs npm texlive-most zathura zathura-pdf-mupdf xdotool")
         run_command("yay -Syu --noconfirm")
         run_command(f"yay -S --needed --noconfirm {pkgs}")
         run_command("curl -fsSL https://gh.io/copilot-install | bash")
         run_command("export PATH=\"$PATH:/home/hime/.local/bin\"")
     
-    elif distro in ['debian', 'ubuntu', 'trixie'] or 'debian' in id_like:
-        # CALL THE EXTERNAL DEBIAN FILE
-        print(f"{BLUE}[INFO]{NC} Running Debian specific setup script...")
-        script_path = os.path.join(os.path.dirname(__file__), "debian_setup.sh")
-        run_command(f"chmod +x {script_path} && {script_path}")
+    elif distro in ['ubuntu', 'kali', 'linuxmint'] or 'ubuntu' in id_like:
+        pkgs = (
+            "hyprland sddm waybar kitty rofi pavucontrol "
+            "pipewire pipewire-audio-client-libraries wireplumber "
+            "neovim dunst policykit-1-gnome "
+            "qtwayland5 qt6-wayland xdg-desktop-portal-hyprland "
+            "grim slurp wl-clipboard swaylock swayidle brightnessctl "
+            "network-manager-gnome bluez blueman thunar fastfetch htop btop "
+            "git curl wget unzip zip tar gzip fonts-noto fonts-noto-color-emoji "
+            "fonts-font-awesome fonts-jetbrains-mono docker.io nodejs npm "
+            "zathura xdotool"
+        )
         
-        # Install remaining repo apps
-        pkgs = "sddm waybar kitty pavucontrol pipewire pipewire-pulse wireplumber fastfetch htop neovim thunar nvidia-driver"
+        run_command("sudo apt update")
         run_command(f"sudo apt install -y {pkgs}")
+        
+        # Oh-my-posh isn't in standard apt repos, install via binary
+        print_info("Installing oh-my-posh...")
+        run_command("curl -s https://oh-my-posh.dev/install.sh | bash -s -- -d ~/.local/bin")
 
     elif distro == 'fedora':
         pkgs = ("hyprland sddm waybar kitty rofi-wayland pulseaudio pavucontrol "

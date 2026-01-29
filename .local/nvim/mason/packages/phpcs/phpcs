@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec php "/home/hime/.local/share/nvim/mason/packages/phpcs/phpcs.phar" "$@"

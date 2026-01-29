@@ -1,4 +1,0 @@
-[ERROR 2026-01-16-22:21:00] ...hare/nvim/lazy/neo-tree.nvim/lua/neo-tree/utils/init.lua:877: Error opening file: vim/_editor.lua:0: nvim_exec2(), line 1: Vim(edit):E325: ATTENTION
-[ERROR 2026-01-16-22:21:06] ...hare/nvim/lazy/neo-tree.nvim/lua/neo-tree/utils/init.lua:877: Error opening file: vim/_editor.lua:0: nvim_exec2(), line 1: Vim(buffer):E325: ATTENTION
-[ERROR 2026-01-16-22:21:59] ...hare/nvim/lazy/neo-tree.nvim/lua/neo-tree/utils/init.lua:877: Error opening file: vim/_editor.lua:0: nvim_exec2(), line 1: Vim(edit):E325: ATTENTION
-[ERROR 2026-01-16-22:32:25] ...hare/nvim/lazy/neo-tree.nvim/lua/neo-tree/utils/init.lua:877: Error opening file: vim/_editor.lua:0: nvim_exec2(), line 1: Vim(edit):E325: ATTENTION

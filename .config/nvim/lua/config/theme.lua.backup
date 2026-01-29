@@ -1,0 +1,61 @@
+local set_hl = vim.api.nvim_set_hl
+
+-- [ 1. THE OFFICIAL SYNTHWAVE '84 PALETTE ]
+local colors = {
+  bg     = "#262335",
+  fg     = "#ffffff", 
+  pink   = "#ff7edb", -- Neon Pink
+  cyan   = "#03edf9", -- Electric Cyan
+  yellow = "#fffb00", -- Neon Yellow
+  orange = "#f97e72", -- Sunset Orange
+  purple = "#b893ce", -- Soft Purple
+  red    = "#fe4450", -- Bright Red
+  grey   = "#848bb2", -- Bluish grey
+}
+
+-- [ 2. APPLY BASE UI ]
+set_hl(0, "Normal", { bg = colors.bg, fg = colors.fg })
+set_hl(0, "LineNr", { fg = "#5c4a7a" })
+set_hl(0, "CursorLine", { bg = "#2d2b45" })
+set_hl(0, "Visual", { bg = "#444267" })
+
+-- [ 3. THE NEON SYNTAX ]
+
+-- KEYWORDS & BUILTINS (Neon Yellow)
+set_hl(0, "Keyword", { fg = colors.yellow, bold = true })
+set_hl(0, "Statement", { fg = colors.yellow, bold = true })
+set_hl(0, "@keyword", { link = "Keyword" })
+set_hl(0, "@keyword.function", { link = "Keyword" })
+set_hl(0, "@variable.builtin", { fg = colors.yellow, italic = true }) -- e.g., 'self' in Python
+
+-- THE PINK ZONE (Variables, Properties, Attributes)
+set_hl(0, "Variable", { fg = colors.pink })
+set_hl(0, "Identifier", { fg = colors.pink })
+set_hl(0, "@variable", { fg = colors.pink })
+set_hl(0, "@property", { fg = colors.pink })
+set_hl(0, "@field", { fg = colors.pink })      -- Fixes member variables
+set_hl(0, "@attribute", { fg = colors.pink })  -- Fixes class attributes
+set_hl(0, "@variable.member", { fg = colors.pink }) -- Fixes self.ANYTHING
+
+-- FUNCTIONS (Electric Cyan)
+set_hl(0, "Function", { fg = colors.cyan })
+set_hl(0, "@function", { link = "Function" })
+set_hl(0, "@function.call", { link = "Function" })
+set_hl(0, "@method", { link = "Function" })
+set_hl(0, "@method.call", { link = "Function" })
+
+-- STRINGS (Sunset Orange)
+set_hl(0, "String", { fg = colors.orange })
+set_hl(0, "@string", { link = "String" })
+
+-- TYPES & CLASSES (Bright Red)
+set_hl(0, "Type", { fg = colors.red, bold = true })
+set_hl(0, "@type", { link = "Type" })
+set_hl(0, "@type.builtin", { link = "Type" })
+set_hl(0, "Constructor", { fg = colors.cyan, bold = true }) -- Constructors usually Cyan in Synthwave
+
+-- PARAMETERS (White Italic for Contrast)
+set_hl(0, "@parameter", { fg = colors.fg, italic = true })
+
+-- COMMENTS (Italic Bluish-Grey)
+set_hl(0, "Comment", { fg = colors.grey, italic = true })

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-exec php "/home/hime/.local/share/nvim/mason/packages/php-cs-fixer/php-cs-fixer.phar" "$@"
