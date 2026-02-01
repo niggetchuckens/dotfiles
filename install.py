@@ -82,8 +82,8 @@ def main(confirm = None):
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
         sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
         
-        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
-                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp cliphist "
+        pkgs = ("hyprland wget sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
+                "waybar rofi wofi hyprpolkitagent wlogout dunst kitty nautilus grim slurp cliphist "
                 "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
                 "playerctl networkmanager network-manager-applet power-profiles-daemon "
                 "polkit gnome-keyring discord fastfetch neovim pacman-contrib "
@@ -107,18 +107,36 @@ def main(confirm = None):
     elif distro in ['ubuntu', 'kali', 'linuxmint'] or 'ubuntu' in id_like:
         # Ubuntu mapping for APPS.md items
         pkgs = ("hyprland xdg-desktop-portal-hyprland wayland-protocols wl-clipboard xwayland "
-                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp "
+                "waybar sddm rofi wofi wlogout dunst kitty nautilus grim slurp "
                 "brightnessctl pipewire wireplumber pipewire-audio-client-libraries "
                 "pavucontrol playerctl network-manager network-manager-gnome "
-                "power-profiles-daemon polkitd-pkla gnome-keyring "
-                "fastfetch neovim fonts-noto papirus-icon-theme")
+                "power-profiles-daemon polkitd gnome-keyring "
+                "fastfetch neovim fonts-noto papirus-icon-theme cmake g++" 
+                "gettext libpolkit-agent-1-dev libpolkit-gobject-1-dev" 
+                "libhyprutils-dev libwayland-dev libglib2.0-dev qt6-base-dev"
+                "qt6-declarative-dev curl libpolkit-qt6-1-dev meson cpuid")
         
         run_command("sudo apt update")
         run_command(f"sudo apt install -y {pkgs}")
         
+        # Hyprpolkitagent manual install
+        print_info("Installing hyprpolkitagent...")
+        run_command("git clone https://github.com/hyprwm/hyprpolkitagent.git")
+        run_command("cd hyprpolkitagent")
+        run_command("cmake --no-cache -S . -B build")
+        run_command("cmake --build build")
+        run_command("sudo cmake --install build")
+        
         # Oh-my-posh manual install
         print_info("Installing oh-my-posh...")
         run_command(f"curl -s https://oh-my-posh.dev/install.sh | bash -s -- -d {user_home}/.local/bin")
+        
+        with open(bashrc_path, "a") as f:
+            f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
+            f.write('export HYPRCURSOR_SIZE=24\n')
+            f.write('export ELECTRON_OZONE_PLATAFORM_HINT=auto\n')
+            f.write('export WLR_DRM_NO_ATOMIC=1\n')
+            f.write('export WLR_NO_HARDWARE_CURSORS=1\n') 
 
     elif distro == 'fedora':
         # Fedora mapping for APPS.md items
