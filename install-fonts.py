@@ -33,7 +33,7 @@ FONT_PACKAGE_MAP = {
 def detect_package_manager():
     """Detect which package manager is available"""
     managers = {
-        'yay': ['/usr/bin/yay', '/bin/yay'],
+        'pacman': ['/usr/bin/pacman', '/bin/pacman'],
         'apt': ['/usr/bin/apt', '/bin/apt'],
         'dnf': ['/usr/bin/dnf', '/bin/dnf'],
     }
@@ -78,7 +78,7 @@ def install_packages_pacman(packages):
     print(f"Installing {len(packages)} font packages with pacman...")
     print(f"Packages: {', '.join(packages)}\n")
     
-    cmd = ['sudo', 'pacman', '-S', '--needed', '--noconfirm'] + packages
+    cmd = ['yay', '-S', '--needed', '--noconfirm'] + packages
     try:
         subprocess.run(cmd, check=True)
         print("\n✓ Fonts installed successfully!")
