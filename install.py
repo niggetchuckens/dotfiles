@@ -2,8 +2,9 @@ import subprocess
 import os
 import argparse
 import sys
+import getpass
 
-BLUE, GREEN, YELLOW, RED, NC = '\033[0;34m', '\033[0;32m', '\033[1;33m', '\033[0;31m', '\033[0m'
+BLUE, GREEN, YELLOW, RED, NC = '\033[0;34m', '\033[0;32m', '\033[1;33m', '\033[0m', '\033[0m'
 
 def print_info(msg):
     print(f"{BLUE}[INFO]{NC} {msg}")
@@ -20,112 +21,147 @@ def print_error(msg):
 def copy_folder(src_name):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     source = os.path.join(script_dir, src_name)
-    destination = os.path.join(os.path.expanduser("~"), src_name)
+    user_home = os.path.expanduser("~")
+    destination = os.path.join(user_home, src_name)
 
     if os.path.exists(source):
         print(f"{BLUE}[INFO]{NC} Copying {src_name} to {destination}...")
+        os.makedirs(destination, exist_ok=True)
         run(f"cp -r {source}/* {destination}/")
     else:
         print(f"{YELLOW}[WARN]{NC} Source {src_name} not found in script directory.")
     
+def copy_file(file_name):
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    source = os.path.join(script_dir, file_name)
+    user_home = os.path.expanduser("~")
+    destination = os.path.join(user_home, file_name)
+
+    if os.path.exists(source):
+        print(f"{BLUE}[INFO]{NC} Copying {file_name} to {user_home}...")
+        run(f"cp {source} {destination}")
+    else:
+        print(f"{YELLOW}[WARN]{NC} {file_name} not found in script directory.")
+        
 def get_distro():
     info = {}
-    with open("/etc/os-release") as f:
-        for line in f:
-            if "=" in line:
-                k, v = line.rstrip().split("=", 1)
-                info[k] = v.strip('"')
+    try:
+        with open("/etc/os-release") as f:
+            for line in f:
+                if "=" in line:
+                    k, v = line.rstrip().split("=", 1)
+                    info[k] = v.strip('"')
+    except FileNotFoundError:
+        return "unknown", []
     return info.get("ID", ""), info.get("ID_LIKE", "").split()
 
 def run_command(cmd, shell=True):
     try:
         subprocess.run(cmd, shell=shell, check=True)
-    except subprocess.CalledProcessError as e:
+    except subprocess.CalledProcessError:
         print_error(f"Command failed: {cmd}")
         sys.exit(1)
 
 def main(confirm = None):
-    # YukiOS Splash Screen
+    current_user = getpass.getuser()
+    user_home = os.path.expanduser("~")
+
+    # YukiOS Splash Screen with yukivim
     print(f"\n{BLUE}╔════════════════════════════════════════════╗{NC}")
     print(f"{BLUE}║           YukiOS dotfiles installer        ║{NC}")
     print(f"{BLUE}╚════════════════════════════════════════════╝{NC}\n")
 
     if confirm is None:
-        confirm = input(f"{YELLOW}[?]{NC} Proceed with installation? [y/N]: ")
+        confirm = input(f"{YELLOW}[?]{NC} Proceed with installation for user '{current_user}'? [y/N]: ")
     if confirm.lower() != 'y': return
     
     distro, id_like = get_distro()
   
     # --- 1. Distro Specific Setup ---
+    # Package lists updated to match APPS.md requirements
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
-        pkgs = ("hyprland sddm waybar kitty rofi-wayland pavucontrol "
-                "pipewire pipewire-pulse wireplumber neovim dunst polkit-kde-agent "
-                "qt5-wayland qt6-wayland xdg-desktop-portal-hyprland grim slurp "
-                "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
-                "bluez bluez-utils blueman thunar fastfetch htop btop neovim git curl "
-                "wget unzip zip tar gzip noto-fonts noto-fonts-emoji "
-                "ttf-font-awesome ttf-jetbrains-mono-nerd docker oh-my-posh rclone"
-                "nodejs npm texlive-most zathura zathura-pdf-mupdf xdotool")
+        sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
+        
+        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
+                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp cliphist "
+                "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
+                "playerctl networkmanager network-manager-applet power-profiles-daemon "
+                "polkit gnome-keyring discord fastfetch neovim pacman-contrib "
+                "ttf-commit-mono-nerd papirus-icon-theme bibata-cursor-theme oh-my-posh")
+        
+        
         run_command("yay -Syu --noconfirm")
         run_command(f"yay -S --needed --noconfirm {pkgs}")
-        run_command("curl -fsSL https://gh.io/copilot-install | bash")
-        run_command("export PATH=\"$PATH:/home/hime/.local/bin\"")
+        run_command(f"export PATH=\"$PATH:{user_home}/.local/bin\"")
+        
+        sunshine = input(f"{YELLOW}[?]{NC} Install Sunshine (Game Streaming Server)? [y/N]: ")
+        if sunshine.lower() == 'y':
+            print_info("Installing Sunshine...")
+            run_command(f"wget {sunshine_url} -O {user_home}/sunshine.pkg.tar.zst")
+            run_command(f"sudo pacman -U {user_home}/sunshine.pkg.tar.zst --noconfirm")
+            run_command(f"rm {user_home}/sunshine.pkg.tar.zst")
+            run_command("systemctl --user enable sunshine") # Enable sunshine service for github build bc the yay installation need lots of ram (my 16gb can't match that :c )
+
+        
     
     elif distro in ['ubuntu', 'kali', 'linuxmint'] or 'ubuntu' in id_like:
-        pkgs = (
-            "hyprland sddm waybar kitty rofi pavucontrol "
-            "pipewire pipewire-audio-client-libraries wireplumber "
-            "neovim dunst policykit-1-gnome "
-            "qtwayland5 qt6-wayland xdg-desktop-portal-hyprland "
-            "grim slurp wl-clipboard swaylock swayidle brightnessctl "
-            "network-manager-gnome bluez blueman thunar fastfetch htop btop "
-            "git curl wget unzip zip tar gzip fonts-noto fonts-noto-color-emoji "
-            "fonts-font-awesome fonts-jetbrains-mono docker.io nodejs npm "
-            "zathura xdotool"
-        )
+        # Ubuntu mapping for APPS.md items
+        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland-protocols wl-clipboard xwayland "
+                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp "
+                "brightnessctl pipewire wireplumber pipewire-audio-client-libraries "
+                "pavucontrol playerctl network-manager network-manager-gnome "
+                "power-profiles-daemon polkitd-pkla gnome-keyring "
+                "fastfetch neovim fonts-noto papirus-icon-theme")
         
         run_command("sudo apt update")
         run_command(f"sudo apt install -y {pkgs}")
         
-        # Oh-my-posh isn't in standard apt repos, install via binary
+        # Oh-my-posh manual install
         print_info("Installing oh-my-posh...")
-        run_command("curl -s https://oh-my-posh.dev/install.sh | bash -s -- -d ~/.local/bin")
+        run_command(f"curl -s https://oh-my-posh.dev/install.sh | bash -s -- -d {user_home}/.local/bin")
 
     elif distro == 'fedora':
-        pkgs = ("hyprland sddm waybar kitty rofi-wayland pulseaudio pavucontrol "
-                "pipewire pipewire-pulseaudio wireplumber dunst polkit-kde "
-                "qt5-qtwayland qt6-qtwayland xdg-desktop-portal-hyprland grim slurp "
-                "wl-clipboard swaylock swayidle brightnessctl network-manager-applet "
-                "bluez bluez-tools blueman thunar neofetch htop btop neovim git curl "
-                "wget unzip zip tar gzip google-noto-fonts google-noto-emoji-fonts "
-                "fontawesome-fonts jetbrains-mono-fonts docker")
+        # Fedora mapping for APPS.md items
+        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland-utils wl-clipboard xorg-x11-server-Xwayland "
+                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp cliphist "
+                "swaybg brightnessctl pipewire wireplumber pipewire-pulseaudio pavucontrol "
+                "playerctl NetworkManager NetworkManager-adwaita-helper power-profiles-daemon "
+                "polkit gnome-keyring discord fastfetch neovim papirus-icon-theme")
         run_command(f"sudo dnf install -y {pkgs}")
 
     # --- 2. Deploy Dotfiles ---
     for folder in [".config", ".local", ".scripts"]:
-        os.makedirs(os.path.expanduser(f"~/{folder}"), exist_ok=True)
+        os.makedirs(os.path.join(user_home, folder), exist_ok=True)
         copy_folder(folder)
+        copy_file(".bashrc")
 
-    # --- 3. Hardware & Alias ---
-    bashrc_path = os.path.expanduser("~/.bashrc")
+    # --- 3. Environment Variables & Alias ---
+    # Values taken from APPS.md "Environment Variables" section
+    bashrc_path = os.path.join(user_home, ".bashrc")
     with open(bashrc_path, "a") as f:
-        f.write('\n# YukiOS Environment\n')
-        f.write('export WLR_NO_HARDWARE_CURSORS=1\n')
-        f.write('alias neofetch="fastfetch"\n')
-
-    print(f"{GREEN}[SUCCESS]{NC} YukiOS setup complete! Please reboot.")
+        f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
+        f.write('export HYPRCURSOR_SIZE=24\n')
+        f.write('export ELECTRON_OZONE_PLATAFORM_HINT=auto\n')
+        f.write('export WLR_DRM_NO_ATOMIC=1\n')
 
     # --- 4. Enable Services ---
-    for service in ["sddm", "bluetooth", "NetworkManager", "docker"]:
+    # User-level services from APPS.md
+    user_services = ["hyprpolkitagent", "pipewire", "wireplumber"]
+    for svc in user_services:
         try:
-            run_command(f"sudo systemctl enable {service}.service")
-        except:
-            pass
+            run_command(f"systemctl --user enable {svc}.service")
+        except: pass
 
-    print(f"{GREEN}[SUCCESS]{NC} Setup complete! Please reboot.")
+    # System-level services
+    system_services = ["sddm", "NetworkManager", "power-profiles-daemon"]
+    for svc in system_services:
+        try:
+            run_command(f"sudo systemctl enable {svc}.service")
+        except: pass
+
+    print(f"{GREEN}[SUCCESS]{NC} YukiOS setup complete for {current_user}! Please reboot.")
 
 if __name__ == "__main__": 
-
     if os.geteuid() == 0:
         print_error("Please do not run this script as root (use sudo within the script instead)")
         sys.exit(1)

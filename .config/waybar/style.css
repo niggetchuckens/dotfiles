@@ -6,40 +6,142 @@
   font-size: 13px;
 }
 
+@keyframes ghost-colors {
+  0%   { color: #1a62ba; } /* Blue */
+  25%  { color: #c531be; } /* Pink/Purple  */
+  50%  { color: #1fe083; } /* Green  */
+  75%  { color: #f9e2af; } /* Yellow  */
+  100% { color: #1a62ba; } /* Back to Blue */
+}
+
+@keyframes marquee {
+  0% {
+    margin-left: 10px;
+    margin-right: 0px;
+  }
+  100% {
+    margin-left: -50px; 
+    margin-right: 10px;
+  }
+}
+
 window#waybar {
-  background-color: rgba(24, 24, 37, 0); /* Transparent background */
+  background-color: rgba(24, 24, 37, 0); 
   color: #cdd6f4;
 }
 
-/* Individual Pill Styling */
 #workspaces,
-#clock,
+#clock {
+  background-color: #1e1e2e;
+  padding: 0px 15px;
+  margin: 5px 3px;
+  border-radius: 10px; 
+}
+
+#workspaces button {
+  animation: ghost-colors 10s infinite alternate;
+  padding: 0 5px;
+}
+
+#workspaces button.active {
+  color: #e4df4a; 
+  animation: none;
+}
+
+#workspaces button.empty {
+  color: #ffffff;
+  animation: none;
+}
+
+#custom-updates {
+  background-color: #1e1e2e; 
+  color: #fab387;            
+  padding: 0px 15px;
+  margin: 5px 3px;
+  border-radius: 10px;       
+}
+
+#custom-updates.warning {
+  color: #f38ba8;            
+}
+
+#mpris {
+  background-color: #1e1e2e;
+  color: #94e2d5; 
+  padding: 0px 15px;
+  margin: 5px 13px;
+  border-radius: 10px;
+}
+
+#hardware {
+  background-color: #1e1e2e;
+  padding: 0px 10px;
+  margin: 5px 3px;
+  border-radius: 12px;
+}
+
 #pulseaudio,
 #network,
+#bluetooth,
 #backlight,
 #battery,
+#power-profiles-daemon {
+  background-color: transparent;
+  margin: 0;
+  padding: 0 8px; /* Adjust spacing between icons here */
+}
+
 #custom-power {
   background-color: #1e1e2e;
   padding: 0px 15px;
   margin: 5px 3px;
-  border-radius: 10px; /* Rounded pill look */
-}
-
-/* Specific Colors to match your image */
-#workspaces button.active {
-  color: #89b4fa; /* Blue for active Pac-Man */
-}
-
-#pulseaudio {
-  color: #89dceb;
+  border-radius: 10px;
+  color: #f2cdcd;
 }
 
 #network {
-  color: #a6e3a1;
+    color: #c531be;
+    border-radius: 12px;
+    padding: 0 12px;
+    margin: 4px 2px;
+    transition: all 0.3s ease;
+}
+
+#bluetooth {
+    color: #34d3d8;
+    border-radius: 12px;
+    padding: 0 12px;
+    margin: 4px 2px;
+    transition: all 0.3s ease;
+}
+
+#pulseaudio {
+    color: #1fe083;
+    border-radius: 12px;
+    padding: 0 12px;
+    margin: 4px 2px;
+    transition: all 0.3s ease;
+}
+
+#mpris {
+  color: #94e2d5;
+}
+
+#custom-separator {
+  color: #585b70; 
+  font-size: 16px;
+}
+
+#clock {
+  color: #cba6f7; 
 }
 
 #backlight {
   color: #f9e2af;
+}
+
+#power-profiles-daemon {
+  color: #1fe083;
 }
 
 #battery {
