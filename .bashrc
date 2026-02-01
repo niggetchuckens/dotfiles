@@ -1,4 +1,4 @@
-export PATH="/home/hime/.local/bin:$PATH"
+export PATH="~/.local/bin:$PATH"
 
 if [ -n "$VIRTUAL_ENV" ]; then
     source "$VIRTUAL_ENV/bin/activate"
@@ -21,5 +21,5 @@ alias cleancache='.scripts/cleancache.sh'
 
 clear
 fastfetch
-eval "$(oh-my-posh init bash --config /home/hime/.config/oh-my-posh/bubblesextra.omp.json)"
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/bubblesextra.omp.json)"
 
