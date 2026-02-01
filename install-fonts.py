@@ -33,7 +33,7 @@ FONT_PACKAGE_MAP = {
 def detect_package_manager():
     """Detect which package manager is available"""
     managers = {
-        'pacman': ['/usr/bin/pacman', '/bin/pacman'],
+        'yay': ['/usr/bin/yay', '/bin/yay'],
         'apt': ['/usr/bin/apt', '/bin/apt'],
         'dnf': ['/usr/bin/dnf', '/bin/dnf'],
     }
