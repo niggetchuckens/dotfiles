@@ -1,0 +1,79 @@
+[2026-03-09 11:47:24.429]: Info: Sunshine version: 2026.204.180221 commit: 22065bfeec7d9af41747349b609c4770f068c17a
+[2026-03-09 11:47:24.429]: Info: Package Publisher: LizardByte
+[2026-03-09 11:47:24.429]: Info: Publisher Website: https://app.lizardbyte.dev
+[2026-03-09 11:47:24.429]: Info: Get support: https://app.lizardbyte.dev/support
+[2026-03-09 11:47:24.429]: Info: config: 'adapter_name' = /dev/dri/renderD129
+[2026-03-09 11:47:24.429]: Info: config: 'capture_timeout' = 250
+[2026-03-09 11:47:24.429]: Info: config: 'capture' = kms
+[2026-03-09 11:47:24.429]: Info: config: 'min_fps_factor' = 2
+[2026-03-09 11:47:24.429]: Info: config: 'nvenc_preset' = 1
+[2026-03-09 11:47:24.429]: Info: config: 'minimum_fps_target' = 30
+[2026-03-09 11:47:24.429]: Info: config: 'output_name' = 0
+[2026-03-09 11:47:24.429]: Info: config: 'system_tray' = disabled
+[2026-03-09 11:47:24.430]: Info: /dev/dri/card0 -> nvidia-drm
+[2026-03-09 11:47:24.443]: Info: /dev/dri/card1 -> amdgpu
+[2026-03-09 11:47:24.444]: Info: Found display [wayland-1]
+[2026-03-09 11:47:24.444]: Info: Found display [wayland-1]
+[2026-03-09 11:47:24.551]: Info: Found interface: zxdg_output_manager_v1(9) version 3
+[2026-03-09 11:47:24.551]: Info: Found interface: zwlr_screencopy_manager_v1(56) version 3
+[2026-03-09 11:47:24.551]: Info: Found interface: zwp_linux_dmabuf_v1(66) version 5
+[2026-03-09 11:47:24.551]: Info: Found interface: wl_output(67) version 4
+[2026-03-09 11:47:24.551]: Info: Found interface: wl_output(68) version 4
+[2026-03-09 11:47:24.553]: Info: Resolution: 1920x1080
+[2026-03-09 11:47:24.553]: Info: Resolution: 1366x768
+[2026-03-09 11:47:24.553]: Info: Name: eDP-1
+[2026-03-09 11:47:24.553]: Info: Found monitor: AU Optronics 0xB78D  (eDP-1)
+[2026-03-09 11:47:24.553]: Info: Offset: 0x0
+[2026-03-09 11:47:24.553]: Info: Logical size: 1920x1080
+[2026-03-09 11:47:24.553]: Info: Name: HDMI-A-1
+[2026-03-09 11:47:24.553]: Info: Found monitor: ViewSonic Corporation VA1616wSERIES QVM082152353 (HDMI-A-1)
+[2026-03-09 11:47:24.553]: Info: Offset: 1920x0
+[2026-03-09 11:47:24.553]: Info: Logical size: 1366x768
+[2026-03-09 11:47:24.553]: Info: -------- Start of KMS monitor list --------
+[2026-03-09 11:47:24.553]: Info: Monitor 0 is HDMI-A-1: ViewSonic Corporation VA1616wSERIES QVM082152353 (HDMI-A-1)
+[2026-03-09 11:47:24.553]: Info: --------- End of KMS monitor list ---------
+[2026-03-09 11:47:24.703]: Warning: Gamepad ds5 is disabled due to Permission denied
+[2026-03-09 11:47:24.703]: Info: // Testing for available encoders, this may generate errors. You can safely ignore those errors. //
+[2026-03-09 11:47:24.703]: Info: Trying encoder [nvenc]
+[2026-03-09 11:47:24.703]: Info: Screencasting with KMS
+[2026-03-09 11:47:24.703]: Info: /dev/dri/card0 -> nvidia-drm
+[2026-03-09 11:47:24.703]: Info: Found monitor for DRM screencasting
+[2026-03-09 11:47:24.703]: Info: Found connector ID [132]
+[2026-03-09 11:47:24.704]: Info: Found cursor plane [56]
+[2026-03-09 11:47:24.704]: Info: Creating encoder [h264_nvenc]
+[2026-03-09 11:47:24.704]: Info: Color coding: SDR (Rec. 601)
+[2026-03-09 11:47:24.704]: Info: Color depth: 8-bit
+[2026-03-09 11:47:24.704]: Info: Color range: JPEG
+[2026-03-09 11:47:24.995]: Info: Streaming bitrate is 1000000
+[2026-03-09 11:47:25.267]: Info: Creating encoder [hevc_nvenc]
+[2026-03-09 11:47:25.267]: Info: Color coding: SDR (Rec. 601)
+[2026-03-09 11:47:25.267]: Info: Color depth: 8-bit
+[2026-03-09 11:47:25.267]: Info: Color range: JPEG
+[2026-03-09 11:47:25.271]: Info: Streaming bitrate is 1000000
+[2026-03-09 11:47:25.539]: Info: Creating encoder [av1_nvenc]
+[2026-03-09 11:47:25.539]: Info: Color coding: SDR (Rec. 601)
+[2026-03-09 11:47:25.540]: Info: Color depth: 8-bit
+[2026-03-09 11:47:25.540]: Info: Color range: JPEG
+[2026-03-09 11:47:25.542]: Info: Streaming bitrate is 1000000
+[2026-03-09 11:47:25.551]: Warning: [av1_nvenc @ 0x55a9a7a87500] Codec not supported
+[2026-03-09 11:47:25.551]: Error: [av1_nvenc @ 0x55a9a7a87500] Provided device doesn't support required NVENC features
+[2026-03-09 11:47:25.802]: Error: Could not open codec [av1_nvenc]: Function not implemented
+[2026-03-09 11:47:25.804]: Info: Screencasting with KMS
+[2026-03-09 11:47:25.804]: Info: /dev/dri/card0 -> nvidia-drm
+[2026-03-09 11:47:25.804]: Info: Found monitor for DRM screencasting
+[2026-03-09 11:47:25.804]: Info: Found connector ID [132]
+[2026-03-09 11:47:25.805]: Info: Found cursor plane [56]
+[2026-03-09 11:47:25.805]: Info: Creating encoder [hevc_nvenc]
+[2026-03-09 11:47:25.805]: Info: Color coding: SDR (Rec. 709)
+[2026-03-09 11:47:25.805]: Info: Color depth: 10-bit
+[2026-03-09 11:47:25.805]: Info: Color range: JPEG
+[2026-03-09 11:47:25.809]: Info: Streaming bitrate is 1000000
+[2026-03-09 11:47:26.080]: Info: 
+[2026-03-09 11:47:26.080]: Info: // Ignore any errors mentioned above, they are not relevant. //
+[2026-03-09 11:47:26.080]: Info: 
+[2026-03-09 11:47:26.080]: Info: Found H.264 encoder: h264_nvenc [nvenc]
+[2026-03-09 11:47:26.080]: Info: Found HEVC encoder: hevc_nvenc [nvenc]
+[2026-03-09 11:47:26.081]: Info: No main thread features enabled, skipping event loop
+[2026-03-09 11:47:26.083]: Info: Adding avahi service Yuki
+[2026-03-09 11:47:26.088]: Info: Configuration UI available at [https://localhost:47990]
+[2026-03-09 11:47:27.073]: Info: Avahi service Yuki successfully established.

@@ -16,8 +16,8 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias z='clear'
-alias tempswap='.scripts/temp-swap.sh'
-alias cleancache='.scripts/cleancache.sh'
+alias tempswap='~/.scripts/temp-swap.sh'
+alias cleancache='~/.scripts/cleancache.sh'
 
 clear
 fastfetch

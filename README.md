@@ -34,6 +34,8 @@
 
 ## 🖥️ Supported Distributions
 
+### Caution: This was tested on archlinux, it may have some issues on others distributions beacause hyprland and it components versions may defer from the one used on this installation
+
 - **Arch Linux** (and derivatives: Manjaro, EndeavourOS)
 - **Ubuntu** / **Kali** / **Mint** (and derivatives: Pop! OS)
 - **Fedora**
@@ -76,8 +78,7 @@
 ```bash
 git clone https://github.com/niggetchuckens/dotfiles.git
 cd dotfiles
-chmod +x install.sh
-./install.sh
+python3 install.py
 ```
 
 The installer will:
@@ -85,14 +86,6 @@ The installer will:
 2. ✅ Install all required packages
 3. ✅ Deploy configuration files to `~/.config` and `~/.local`
 4. ✅ Enable system services (SDDM, Bluetooth, NetworkManager, Docker)
-
-### Manual Installation
-
-If you prefer to run the Python installer directly:
-
-```bash
-python3 install.py
-```
 
 ## 📁 Structure
 

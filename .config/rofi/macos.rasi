@@ -1,0 +1,55 @@
+/* ~/.config/rofi/macos.rasi */
+configuration {
+    show-icons: true;
+    display-drun: "";
+    disable-history: false;
+    sidebar-mode: false;
+}
+
+* {
+    font: "SF Pro Display Bold 11";
+    bg: #161616D9;            /* macOS Dark Panel */
+    fg: #FFFFFF;
+    accent: #007AFF;          /* macOS Blue */
+    border-col: #FFFFFF1A;
+}
+
+window {
+    location: north east;
+    anchor:   north east;
+    x-offset: -15px; /* Offset from right edge */
+    y-offset: 40px;  /* Offset from top (Waybar height) */
+}
+
+mainbox {
+    padding: 12px;
+    background-color: transparent;
+}
+
+listview {
+    lines: 8;
+    scrollbar: false;
+    background-color: transparent;
+}
+
+element {
+    padding: 10px;
+    margin: 2px 0;
+    border-radius: 10px;
+    background-color: transparent;
+    text-color: @fg;
+}
+
+element selected {
+    background-color: @accent;
+    text-color: @fg;
+}
+
+element-icon {
+    size: 24px;
+    margin: 0 10px 0 0;
+}
+
+element-text {
+    vertical-align: 0.5;
+}

@@ -13,26 +13,19 @@
     ],
     "modules-right": [
         "group/hardware",
-        "custom/power"
+        "custom/power"     
     ],
-
-    "group/center":{
-        "orientation":"horizontal",
-        "modules":[
-            "mpris",
-            "custom/separator",
-            "clock"
-        ]
-    },
     "group/hardware": {
         "orientation": "horizontal",
         "modules": [
+            "cpu",
+            "custom/gpu",
             "pulseaudio",
             "network",
             "backlight",
-            "power-profiles-daemon",
             "battery",
-            "custom/updates"
+            "custom/updates",
+            "power-profiles-daemon"
         ]
     },
 
@@ -48,13 +41,27 @@
             "default": "\udb80\udea0"
         }
     },
+
+    "cpu": {
+        "interval": 1,
+        "format": "{icon} {usage}% ",
+        "format-icons": [""],
+        "max-length": 10,
+        "on-click": "kitty -e btop" 
+    },
+    "custom/gpu": {
+        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "format": "󰾲 {}%",
+        "interval": 1,
+        "on-click": "kitty -e nvtop"
+    },
     "custom/updates": {
-        "format": "󰚰 {}",
+        "format": " 󰚰 {}",
         "escape": true,
         "return-type": "json",       
         "exec": "~/.config/waybar/scripts/updates.sh",
         "restart-interval": 60,      
-        "on-click": "kitty -e yay -Syu", 
+        "on-click": "kitty -e yay -Syu --noconfirm", 
         "tooltip": true
     },
     "mpris": {
@@ -73,28 +80,30 @@
         "ignored-players": ["vlc"],
         "max-length": 40
     },
-    "custom/separator": {
-        "format": "  |  ",
-        "interval": "once",
-        "tooltip": false
-    },
     "clock": {
         "format": "{:%I:%M %p}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "pulseaudio": {
-        "format": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "on-click": "pavucontrol", 
+        "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "scroll-step": 5,
         "format-icons": {
-            "default": [
-                "\uf026",
-                "\uf027",
-                "\uf028"
-            ]
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "tooltip": true,
+        "tooltip-format": "{icon} {desc} | {volume}%"
     },
     "network": {
-        "format-wifi": "  {signalStrength}%",
+        "format-wifi": " {signalStrength}%",
         "format-ethernet": "\udb80\ude00 {ipaddr}",
         "format-disconnected": "Disconnected \u26a0",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)\n\udb82\ude5f {ipaddr}/{cidr}\n\udb81\udf92 {gwaddr}",
@@ -103,7 +112,7 @@
         "on-click": "nm-connection-editor"
     },
     "backlight": {
-        "format": "{percent}% {icon}",
+        "format": "{icon} {percent}%",
         "format-icons": [
             "\ue38d",
             "\ue3d3",
@@ -121,14 +130,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-icons": [
-            "\uf244",
-            "\uf243",
-            "\uf242",
-            "\uf241",
-            "\uf240"
-        ]
+        "format": "{icon} {capacity}%",
+        "format-charging": "󱐋 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
     },
     "power-profiles-daemon": {
         "format": "{icon}",

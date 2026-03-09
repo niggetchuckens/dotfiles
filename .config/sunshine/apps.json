@@ -5,7 +5,7 @@
             "cmd": "",
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
-            "image-path": "/home/hime/.config/sunshine/icons/desktop.png",
+            "image-path": "/home/hime/.config/sunshine/icons/desktop.jpg",
             "name": "Desktop",
             "prep-cmd": [
                 {
@@ -16,15 +16,19 @@
             "wait-all": true
         },
         {
-            "cmd": "code /home/hime/code",
-            "image-path": "/home/hime/.config/sunshine/icons/vscode.png",
+            "auto-detach": true,
+            "cmd": "",
+            "exclude-global-prep-cmd": false,
+            "exit-timeout": 5,
+            "image-path": "/home/hime/.config/sunshine/icons/vscode.jpg",
             "name": "Visual studio code",
             "prep-cmd": [
                 {
                     "do": "",
-                    "undo": "setsid steam steam://close/bigpicture"
+                    "undo": ""
                 }
-            ]
+            ],
+            "wait-all": true
         }
     ],
     "env": {

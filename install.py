@@ -3,6 +3,7 @@ import os
 import argparse
 import sys
 import getpass
+import install_fonts
 
 BLUE, GREEN, YELLOW, RED, NC = '\033[0;34m', '\033[0;32m', '\033[1;33m', '\033[0m', '\033[0m'
 
@@ -82,7 +83,7 @@ def main(confirm = None):
     if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
         sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
         
-        pkgs = ("hyprland wget sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
+        pkgs = ("hyprland wget tlp-pd sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
                 "waybar rofi wofi hyprpolkitagent wlogout dunst kitty nautilus grim slurp cliphist "
                 "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
                 "playerctl networkmanager network-manager-applet power-profiles-daemon "
@@ -101,8 +102,6 @@ def main(confirm = None):
             run_command(f"sudo pacman -U {user_home}/sunshine.pkg.tar.zst --noconfirm")
             run_command(f"rm {user_home}/sunshine.pkg.tar.zst")
             run_command("systemctl --user enable sunshine") # Enable sunshine service for github build bc the yay installation need lots of ram (my 16gb can't match that :c )
-
-        
     
     elif distro in ['ubuntu', 'kali', 'linuxmint'] or 'ubuntu' in id_like:
         # Ubuntu mapping for APPS.md items
@@ -110,7 +109,7 @@ def main(confirm = None):
                 "waybar sddm rofi wofi wlogout dunst kitty nautilus grim slurp "
                 "brightnessctl pipewire wireplumber pipewire-audio-client-libraries "
                 "pavucontrol playerctl network-manager network-manager-gnome "
-                "power-profiles-daemon polkitd gnome-keyring "
+                "power-profiles-daemon syawbg polkitd gnome-keyring "
                 "fastfetch neovim fonts-noto papirus-icon-theme cmake g++" 
                 "gettext libpolkit-agent-1-dev libpolkit-gobject-1-dev" 
                 "libhyprutils-dev libwayland-dev libglib2.0-dev qt6-base-dev"
@@ -129,7 +128,7 @@ def main(confirm = None):
         
         # Oh-my-posh manual install
         print_info("Installing oh-my-posh...")
-        run_command(f"curl -s https://oh-my-posh.dev/install.sh | bash -s -- -d {user_home}/.local/bin")
+        run_command(f"curl -s https://oh-my-posh.dev/install.sh | bash -s")
         
         with open(bashrc_path, "a") as f:
             f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
@@ -153,8 +152,11 @@ def main(confirm = None):
         copy_folder(folder)
         copy_file(".bashrc")
 
-    # --- 3. Environment Variables & Alias ---
+    # --- 3. Environment Variables, Alias & Fonts ---
     # Values taken from APPS.md "Environment Variables" section
+    
+    install_fonts.install_fonts()
+    
     bashrc_path = os.path.join(user_home, ".bashrc")
     with open(bashrc_path, "a") as f:
         f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
@@ -171,7 +173,7 @@ def main(confirm = None):
         except: pass
 
     # System-level services
-    system_services = ["sddm", "NetworkManager", "power-profiles-daemon"]
+    system_services = ["sddm", "NetworkManager", "power-profiles-daemon", "tlp-pd"]
     for svc in system_services:
         try:
             run_command(f"sudo systemctl enable {svc}.service")

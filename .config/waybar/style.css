@@ -1,6 +1,8 @@
 * {
   border: none;
   border-radius: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
   min-height: 0;
   font-family: "CommitMono Nerd Font", monospace;
   font-size: 13px;
@@ -26,8 +28,17 @@
 }
 
 window#waybar {
-  background-color: rgba(24, 24, 37, 0); 
+  background-color: transparent;
   color: #cdd6f4;
+}
+
+#custom-arch {
+  background-color: #1e1e2e;
+  color: #89b4fa; 
+  padding: 0px 15px;
+  margin: 5px 3px;
+  border-radius: 10px;
+  font-size: 18px; 
 }
 
 #workspaces,
@@ -54,11 +65,9 @@ window#waybar {
 }
 
 #custom-updates {
-  background-color: #1e1e2e; 
-  color: #fab387;            
-  padding: 0px 15px;
-  margin: 5px 3px;
-  border-radius: 10px;       
+  background-color: #1e1e2e;
+  color: #fab387;    
+  margin: 5px 9px 5px 0px;  
 }
 
 #custom-updates.warning {
@@ -81,55 +90,43 @@ window#waybar {
 }
 
 #pulseaudio,
-#network,
-#bluetooth,
 #backlight,
 #battery,
-#power-profiles-daemon {
+#power-profiles-daemon,
+#custom-updates {
   background-color: transparent;
   margin: 0;
-  padding: 0 8px; /* Adjust spacing between icons here */
+  padding: 0 5px; 
 }
 
 #custom-power {
   background-color: #1e1e2e;
-  padding: 0px 15px;
-  margin: 5px 3px;
-  border-radius: 10px;
   color: #f2cdcd;
+  padding: 0px 10px;
+  margin: 5px 3px;
+  border-radius: 8px;
 }
 
 #network {
     color: #c531be;
     border-radius: 12px;
-    padding: 0 12px;
-    margin: 4px 2px;
-    transition: all 0.3s ease;
-}
-
-#bluetooth {
-    color: #34d3d8;
-    border-radius: 12px;
-    padding: 0 12px;
-    margin: 4px 2px;
+    padding: 0 3px;   
+    margin: 0;       
     transition: all 0.3s ease;
 }
 
 #pulseaudio {
-    color: #1fe083;
-    border-radius: 12px;
-    padding: 0 12px;
-    margin: 4px 2px;
+    color: #f5e0dc; 
     transition: all 0.3s ease;
+}
+
+#pulseaudio.muted {
+    background-color: #f38ba8; /* Red for muted */
+    color: #1e1e2e;
 }
 
 #mpris {
   color: #94e2d5;
-}
-
-#custom-separator {
-  color: #585b70; 
-  font-size: 16px;
 }
 
 #clock {
