@@ -10,9 +10,6 @@ BLUE, GREEN, YELLOW, RED, NC = '\033[0;34m', '\033[0;32m', '\033[1;33m', '\033[0
 def print_info(msg):
     print(f"{BLUE}[INFO]{NC} {msg}")
 
-def run(cmd):
-    subprocess.run(cmd, shell=True, check=True)
-
 def print_success(msg):
     print(f"{GREEN}[SUCCESS]{NC} {msg}")
 
@@ -44,18 +41,6 @@ def copy_file(file_name):
     else:
         print(f"{YELLOW}[WARN]{NC} {file_name} not found in script directory.")
         
-def get_distro():
-    info = {}
-    try:
-        with open("/etc/os-release") as f:
-            for line in f:
-                if "=" in line:
-                    k, v = line.rstrip().split("=", 1)
-                    info[k] = v.strip('"')
-    except FileNotFoundError:
-        return "unknown", []
-    return info.get("ID", ""), info.get("ID_LIKE", "").split()
-
 def run_command(cmd, shell=True):
     try:
         subprocess.run(cmd, shell=shell, check=True)
@@ -76,75 +61,35 @@ def main(confirm = None):
         confirm = input(f"{YELLOW}[?]{NC} Proceed with installation for user '{current_user}'? [y/N]: ")
     if confirm.lower() != 'y': return
     
-    distro, id_like = get_distro()
-  
-    # --- 1. Distro Specific Setup ---
-    # Package lists updated to match APPS.md requirements
-    if distro in ['arch', 'manjaro', 'endeavouros'] or 'arch' in id_like:
-        sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
+    sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
         
-        pkgs = ("hyprland wget tlp-pd sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
+    pkgs = (
+                "hyprland wget tlp-pd sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
                 "waybar rofi wofi hyprpolkitagent wlogout dunst kitty nautilus grim slurp cliphist "
                 "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
-                "playerctl networkmanager network-manager-applet power-profiles-daemon "
+                "playerctl network-manager-applet power-profiles-daemon "
                 "polkit gnome-keyring discord fastfetch neovim pacman-contrib "
-                "ttf-commit-mono-nerd papirus-icon-theme bibata-cursor-theme oh-my-posh")
+                "ttf-commit-mono-nerd papirus-icon-theme bibata-cursor-theme oh-my-posh"
+            )
         
         
-        run_command("yay -Syu --noconfirm")
-        run_command(f"yay -S --needed --noconfirm {pkgs}")
-        run_command(f"export PATH=\"$PATH:{user_home}/.local/bin\"")
-        
-        sunshine = input(f"{YELLOW}[?]{NC} Install Sunshine (Game Streaming Server)? [y/N]: ")
-        if sunshine.lower() == 'y':
-            print_info("Installing Sunshine...")
-            run_command(f"wget {sunshine_url} -O {user_home}/sunshine.pkg.tar.zst")
-            run_command(f"sudo pacman -U {user_home}/sunshine.pkg.tar.zst --noconfirm")
-            run_command(f"rm {user_home}/sunshine.pkg.tar.zst")
-            run_command("systemctl --user enable sunshine") # Enable sunshine service for github build bc the yay installation need lots of ram (my 16gb can't match that :c )
-    
-    elif distro in ['ubuntu', 'kali', 'linuxmint'] or 'ubuntu' in id_like:
-        # Ubuntu mapping for APPS.md items
-        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland-protocols wl-clipboard xwayland "
-                "waybar sddm rofi wofi wlogout dunst kitty nautilus grim slurp "
-                "brightnessctl pipewire wireplumber pipewire-audio-client-libraries "
-                "pavucontrol playerctl network-manager network-manager-gnome "
-                "power-profiles-daemon syawbg polkitd gnome-keyring "
-                "fastfetch neovim fonts-noto papirus-icon-theme cmake g++" 
-                "gettext libpolkit-agent-1-dev libpolkit-gobject-1-dev" 
-                "libhyprutils-dev libwayland-dev libglib2.0-dev qt6-base-dev"
-                "qt6-declarative-dev curl libpolkit-qt6-1-dev meson cpuid")
-        
-        run_command("sudo apt update")
-        run_command(f"sudo apt install -y {pkgs}")
-        
-        # Hyprpolkitagent manual install
-        print_info("Installing hyprpolkitagent...")
-        run_command("git clone https://github.com/hyprwm/hyprpolkitagent.git")
-        run_command("cd hyprpolkitagent")
-        run_command("cmake --no-cache -S . -B build")
-        run_command("cmake --build build")
-        run_command("sudo cmake --install build")
-        
-        # Oh-my-posh manual install
-        print_info("Installing oh-my-posh...")
-        run_command(f"curl -s https://oh-my-posh.dev/install.sh | bash -s")
-        
-        with open(bashrc_path, "a") as f:
-            f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
-            f.write('export HYPRCURSOR_SIZE=24\n')
-            f.write('export ELECTRON_OZONE_PLATAFORM_HINT=auto\n')
-            f.write('export WLR_DRM_NO_ATOMIC=1\n')
-            f.write('export WLR_NO_HARDWARE_CURSORS=1\n') 
+    commands = (   
+                f"yay -Syu --needed --noconfirm {pkgs}",
+                f"export PATH=\"$PATH:{user_home}/.local/bin\""
+            )
 
-    elif distro == 'fedora':
-        # Fedora mapping for APPS.md items
-        pkgs = ("hyprland xdg-desktop-portal-hyprland wayland-utils wl-clipboard xorg-x11-server-Xwayland "
-                "waybar rofi wofi wlogout dunst kitty nautilus grim slurp cliphist "
-                "swaybg brightnessctl pipewire wireplumber pipewire-pulseaudio pavucontrol "
-                "playerctl NetworkManager NetworkManager-adwaita-helper power-profiles-daemon "
-                "polkit gnome-keyring discord fastfetch neovim papirus-icon-theme")
-        run_command(f"sudo dnf install -y {pkgs}")
+    run_command(command for command in commands)
+        
+    sunshine = input(f"{YELLOW}[?]{NC} Install Sunshine (Game Streaming Server)? [y/N]: ")
+    if sunshine.lower() == 'y':
+        print_info("Installing Sunshine...")
+        sunshine_commands = (
+            f"wget {sunshine_url} -O {user_home}/sunshine.pkg.tar.zst",
+            f"sudo pacman -U {user_home}/sunshine.pkg.tar.zst --noconfirm",
+            f"rm {user_home}/sunshine.pkg.tar.zst",
+            "systemctl --user enable sunshine") # Enable sunshine service for github build bc the yay installation need lots of ram (my 16gb can't match that :c )
+        run_command(command for command in sunshine_commands)
+   
 
     # --- 2. Deploy Dotfiles ---
     for folder in [".config", ".local", ".scripts"]:
@@ -156,13 +101,6 @@ def main(confirm = None):
     # Values taken from APPS.md "Environment Variables" section
     
     install_fonts.install_fonts()
-    
-    bashrc_path = os.path.join(user_home, ".bashrc")
-    with open(bashrc_path, "a") as f:
-        f.write('export HYPRCURSOR_THEME="Bibata Modern Classic Right"\n')
-        f.write('export HYPRCURSOR_SIZE=24\n')
-        f.write('export ELECTRON_OZONE_PLATAFORM_HINT=auto\n')
-        f.write('export WLR_DRM_NO_ATOMIC=1\n')
 
     # --- 4. Enable Services ---
     # User-level services from APPS.md
