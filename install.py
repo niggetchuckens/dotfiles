@@ -64,7 +64,7 @@ def main(confirm = None):
     sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
         
     pkgs = (
-                "hyprland wget tlp-pd sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
+                "hyprland wget sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
                 "waybar rofi wofi hyprpolkitagent wlogout dunst kitty nautilus grim slurp cliphist "
                 "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
                 "playerctl network-manager-applet power-profiles-daemon "
