@@ -117,6 +117,16 @@ def main(confirm = None):
             run_command(f"sudo systemctl enable {svc}.service")
         except: pass
 
+    # --- 5. System Configuration ---
+    print_info("Configuring system time and timezone...")
+    try:
+        run_command("sudo timedatectl set-timezone America/Santiago")
+        run_command("sudo timedatectl set-ntp true")
+        run_command("sudo hwclock --systohc")
+        print_success("Timezone and NTP configured.")
+    except:
+        print_error("Failed to configure timezone/NTP.")
+
     print(f"{GREEN}[SUCCESS]{NC} YukiOS setup complete for {current_user}! Please reboot.")
 
 if __name__ == "__main__": 
