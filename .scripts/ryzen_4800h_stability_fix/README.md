@@ -161,7 +161,7 @@ fs.file-max=2097152             # File descriptor limit
 ## ⚠️ Important Notes
 
 1. **Reboot Required:** GRUB changes need system reboot
-2. **Password:** Scripts use 'completo' sudo password
+2. **Password:** Scripts use '**********' sudo password
 3. **Backups:** Auto-backups created before modifications
 4. **Logs:** All diagnostics saved to `~/.copilot/history/`
 5. **Thermal:** Monitor temps with `sensors` command

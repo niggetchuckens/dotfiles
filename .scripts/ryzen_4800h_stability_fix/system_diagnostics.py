@@ -13,7 +13,7 @@ from pathlib import Path
 def run_cmd(cmd, use_sudo=False):
     """Execute shell command and return output"""
     if use_sudo:
-        cmd = f"echo 'completo' | sudo -S {cmd}"
+        cmd = f"echo '**********' | sudo -S {cmd}"
     try:
         result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
         return result.stdout.strip(), result.returncode
