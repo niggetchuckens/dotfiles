@@ -25,7 +25,7 @@ def copy_folder(src_name):
     if os.path.exists(source):
         print(f"{BLUE}[INFO]{NC} Copying {src_name} to {destination}...")
         os.makedirs(destination, exist_ok=True)
-        run(f"cp -r {source}/* {destination}/")
+        run_command(f"cp -r {source}/* {destination}/")
     else:
         print(f"{YELLOW}[WARN]{NC} Source {src_name} not found in script directory.")
     
@@ -37,7 +37,7 @@ def copy_file(file_name):
 
     if os.path.exists(source):
         print(f"{BLUE}[INFO]{NC} Copying {file_name} to {user_home}...")
-        run(f"cp {source} {destination}")
+        run_command(f"cp {source} {destination}")
     else:
         print(f"{YELLOW}[WARN]{NC} {file_name} not found in script directory.")
         
@@ -100,7 +100,7 @@ def main(confirm = None):
     # --- 3. Environment Variables, Alias & Fonts ---
     # Values taken from APPS.md "Environment Variables" section
     
-    install_fonts.install_fonts()
+    install_fonts.main()
 
     # --- 4. Enable Services ---
     # User-level services from APPS.md
