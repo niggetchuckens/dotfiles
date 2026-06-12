@@ -1,1 +1,9 @@
 .local/nvim/lazy/
+# Sensitive files
+.config/sunshine/credentials/
+.config/sunshine/sunshine_state.json
+.local/share/recently-used.xbel
+.local/share/keyrings/
+.ssh/
+**/*.pem
+**/*.key
