@@ -50,7 +50,7 @@
         "on-click": "kitty -e btop" 
     },
     "custom/gpu": {
-        "exec": "nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits",
+        "exec": "cat /sys/class/drm/card1/device/gpu_busy_percent",
         "format": "󰾲 {}%",
         "interval": 1,
         "on-click": "kitty -e nvtop"

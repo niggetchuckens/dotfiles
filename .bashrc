@@ -23,3 +23,5 @@ clear
 fastfetch
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/bubblesextra.omp.json)"
 
+export PATH=$HOME/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock

@@ -1,79 +1,140 @@
-[2026-03-09 11:47:24.429]: Info: Sunshine version: 2026.204.180221 commit: 22065bfeec7d9af41747349b609c4770f068c17a
-[2026-03-09 11:47:24.429]: Info: Package Publisher: LizardByte
-[2026-03-09 11:47:24.429]: Info: Publisher Website: https://app.lizardbyte.dev
-[2026-03-09 11:47:24.429]: Info: Get support: https://app.lizardbyte.dev/support
-[2026-03-09 11:47:24.429]: Info: config: 'adapter_name' = /dev/dri/renderD129
-[2026-03-09 11:47:24.429]: Info: config: 'capture_timeout' = 250
-[2026-03-09 11:47:24.429]: Info: config: 'capture' = kms
-[2026-03-09 11:47:24.429]: Info: config: 'min_fps_factor' = 2
-[2026-03-09 11:47:24.429]: Info: config: 'nvenc_preset' = 1
-[2026-03-09 11:47:24.429]: Info: config: 'minimum_fps_target' = 30
-[2026-03-09 11:47:24.429]: Info: config: 'output_name' = 0
-[2026-03-09 11:47:24.429]: Info: config: 'system_tray' = disabled
-[2026-03-09 11:47:24.430]: Info: /dev/dri/card0 -> nvidia-drm
-[2026-03-09 11:47:24.443]: Info: /dev/dri/card1 -> amdgpu
-[2026-03-09 11:47:24.444]: Info: Found display [wayland-1]
-[2026-03-09 11:47:24.444]: Info: Found display [wayland-1]
-[2026-03-09 11:47:24.551]: Info: Found interface: zxdg_output_manager_v1(9) version 3
-[2026-03-09 11:47:24.551]: Info: Found interface: zwlr_screencopy_manager_v1(56) version 3
-[2026-03-09 11:47:24.551]: Info: Found interface: zwp_linux_dmabuf_v1(66) version 5
-[2026-03-09 11:47:24.551]: Info: Found interface: wl_output(67) version 4
-[2026-03-09 11:47:24.551]: Info: Found interface: wl_output(68) version 4
-[2026-03-09 11:47:24.553]: Info: Resolution: 1920x1080
-[2026-03-09 11:47:24.553]: Info: Resolution: 1366x768
-[2026-03-09 11:47:24.553]: Info: Name: eDP-1
-[2026-03-09 11:47:24.553]: Info: Found monitor: AU Optronics 0xB78D  (eDP-1)
-[2026-03-09 11:47:24.553]: Info: Offset: 0x0
-[2026-03-09 11:47:24.553]: Info: Logical size: 1920x1080
-[2026-03-09 11:47:24.553]: Info: Name: HDMI-A-1
-[2026-03-09 11:47:24.553]: Info: Found monitor: ViewSonic Corporation VA1616wSERIES QVM082152353 (HDMI-A-1)
-[2026-03-09 11:47:24.553]: Info: Offset: 1920x0
-[2026-03-09 11:47:24.553]: Info: Logical size: 1366x768
-[2026-03-09 11:47:24.553]: Info: -------- Start of KMS monitor list --------
-[2026-03-09 11:47:24.553]: Info: Monitor 0 is HDMI-A-1: ViewSonic Corporation VA1616wSERIES QVM082152353 (HDMI-A-1)
-[2026-03-09 11:47:24.553]: Info: --------- End of KMS monitor list ---------
-[2026-03-09 11:47:24.703]: Warning: Gamepad ds5 is disabled due to Permission denied
-[2026-03-09 11:47:24.703]: Info: // Testing for available encoders, this may generate errors. You can safely ignore those errors. //
-[2026-03-09 11:47:24.703]: Info: Trying encoder [nvenc]
-[2026-03-09 11:47:24.703]: Info: Screencasting with KMS
-[2026-03-09 11:47:24.703]: Info: /dev/dri/card0 -> nvidia-drm
-[2026-03-09 11:47:24.703]: Info: Found monitor for DRM screencasting
-[2026-03-09 11:47:24.703]: Info: Found connector ID [132]
-[2026-03-09 11:47:24.704]: Info: Found cursor plane [56]
-[2026-03-09 11:47:24.704]: Info: Creating encoder [h264_nvenc]
-[2026-03-09 11:47:24.704]: Info: Color coding: SDR (Rec. 601)
-[2026-03-09 11:47:24.704]: Info: Color depth: 8-bit
-[2026-03-09 11:47:24.704]: Info: Color range: JPEG
-[2026-03-09 11:47:24.995]: Info: Streaming bitrate is 1000000
-[2026-03-09 11:47:25.267]: Info: Creating encoder [hevc_nvenc]
-[2026-03-09 11:47:25.267]: Info: Color coding: SDR (Rec. 601)
-[2026-03-09 11:47:25.267]: Info: Color depth: 8-bit
-[2026-03-09 11:47:25.267]: Info: Color range: JPEG
-[2026-03-09 11:47:25.271]: Info: Streaming bitrate is 1000000
-[2026-03-09 11:47:25.539]: Info: Creating encoder [av1_nvenc]
-[2026-03-09 11:47:25.539]: Info: Color coding: SDR (Rec. 601)
-[2026-03-09 11:47:25.540]: Info: Color depth: 8-bit
-[2026-03-09 11:47:25.540]: Info: Color range: JPEG
-[2026-03-09 11:47:25.542]: Info: Streaming bitrate is 1000000
-[2026-03-09 11:47:25.551]: Warning: [av1_nvenc @ 0x55a9a7a87500] Codec not supported
-[2026-03-09 11:47:25.551]: Error: [av1_nvenc @ 0x55a9a7a87500] Provided device doesn't support required NVENC features
-[2026-03-09 11:47:25.802]: Error: Could not open codec [av1_nvenc]: Function not implemented
-[2026-03-09 11:47:25.804]: Info: Screencasting with KMS
-[2026-03-09 11:47:25.804]: Info: /dev/dri/card0 -> nvidia-drm
-[2026-03-09 11:47:25.804]: Info: Found monitor for DRM screencasting
-[2026-03-09 11:47:25.804]: Info: Found connector ID [132]
-[2026-03-09 11:47:25.805]: Info: Found cursor plane [56]
-[2026-03-09 11:47:25.805]: Info: Creating encoder [hevc_nvenc]
-[2026-03-09 11:47:25.805]: Info: Color coding: SDR (Rec. 709)
-[2026-03-09 11:47:25.805]: Info: Color depth: 10-bit
-[2026-03-09 11:47:25.805]: Info: Color range: JPEG
-[2026-03-09 11:47:25.809]: Info: Streaming bitrate is 1000000
-[2026-03-09 11:47:26.080]: Info: 
-[2026-03-09 11:47:26.080]: Info: // Ignore any errors mentioned above, they are not relevant. //
-[2026-03-09 11:47:26.080]: Info: 
-[2026-03-09 11:47:26.080]: Info: Found H.264 encoder: h264_nvenc [nvenc]
-[2026-03-09 11:47:26.080]: Info: Found HEVC encoder: hevc_nvenc [nvenc]
-[2026-03-09 11:47:26.081]: Info: No main thread features enabled, skipping event loop
-[2026-03-09 11:47:26.083]: Info: Adding avahi service Yuki
-[2026-03-09 11:47:26.088]: Info: Configuration UI available at [https://localhost:47990]
-[2026-03-09 11:47:27.073]: Info: Avahi service Yuki successfully established.
+[2026-06-12 09:36:19.649]: Info: Sunshine version: 2026.516.143833 commit: 14ffa6fdaa53f7b51512be2b3d24f3939695403c
+[2026-06-12 09:36:19.649]: Info: Package Publisher: LizardByte
+[2026-06-12 09:36:19.649]: Info: Publisher Website: https://app.lizardbyte.dev
+[2026-06-12 09:36:19.649]: Info: Get support: https://app.lizardbyte.dev/support
+[2026-06-12 09:36:19.649]: Warning: Couldn't find app image at path [vscode.png]
+[2026-06-12 09:36:19.650]: Info: [wayland] Found display [wayland-1]
+[2026-06-12 09:36:19.690]: Info: [wayland] Found interface: zxdg_output_manager_v1(9) version 3
+[2026-06-12 09:36:19.690]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(58) version 3
+[2026-06-12 09:36:19.690]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(67) version 5
+[2026-06-12 09:36:19.690]: Info: [wayland] Found interface: wl_output(68) version 4
+[2026-06-12 09:36:19.691]: Info: [wayland] Resolution: 1920x1080
+[2026-06-12 09:36:19.691]: Info: [wayland] Name: HDMI-A-1
+[2026-06-12 09:36:19.691]: Info: [wayland] Found monitor: Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)
+[2026-06-12 09:36:19.691]: Info: [wayland] Offset: 0x0
+[2026-06-12 09:36:19.691]: Info: [wayland] Logical size: 1920x1080
+[2026-06-12 09:36:19.691]: Info: [wlgrab] -------- Start of Wayland monitor list --------
+[2026-06-12 09:36:19.691]: Info: [wlgrab] Monitor 0 is HDMI-A-1: Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)
+[2026-06-12 09:36:19.691]: Info: [wlgrab] --------- End of Wayland monitor list ---------
+[2026-06-12 09:36:19.719]: Info: // Testing for available encoders, this may generate errors. You can safely ignore those errors. //
+[2026-06-12 09:36:19.719]: Info: Trying encoder [nvenc]
+[2026-06-12 09:36:19.719]: Info: [misc] drop_elevated_privileges succeeded in dropping capabilities
+[2026-06-12 09:36:19.719]: Info: Screencasting with Wayland's protocol
+[2026-06-12 09:36:19.719]: Info: [wlgrab] Requested frame rate [60/1, approx. 60 fps]
+[2026-06-12 09:36:19.719]: Info: [wayland] Found display [wayland-1]
+[2026-06-12 09:36:19.719]: Info: [wayland] Found interface: zxdg_output_manager_v1(9) version 3
+[2026-06-12 09:36:19.720]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(58) version 3
+[2026-06-12 09:36:19.720]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(67) version 5
+[2026-06-12 09:36:19.720]: Info: [wayland] Found interface: wl_output(68) version 4
+[2026-06-12 09:36:19.720]: Info: [wayland] Resolution: 1920x1080
+[2026-06-12 09:36:19.720]: Info: [wayland] Name: HDMI-A-1
+[2026-06-12 09:36:19.720]: Info: [wayland] Found monitor: Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)
+[2026-06-12 09:36:19.720]: Info: [wayland] Offset: 0x0
+[2026-06-12 09:36:19.720]: Info: [wayland] Logical size: 1920x1080
+[2026-06-12 09:36:19.720]: Info: [wlgrab] Selected monitor [Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)] for streaming
+[2026-06-12 09:36:19.720]: Info: Creating encoder [h264_nvenc]
+[2026-06-12 09:36:19.720]: Info: Color coding: SDR (Rec. 601)
+[2026-06-12 09:36:19.720]: Info: Color depth: 8-bit
+[2026-06-12 09:36:19.720]: Info: Color range: JPEG
+[2026-06-12 09:36:19.720]: Error: [CUDA @ 0x555d37a85040] Cannot load libcuda.so.1
+[2026-06-12 09:36:19.722]: Error: [CUDA @ 0x555d37a85040] Could not dynamically load CUDA
+[2026-06-12 09:36:19.722]: Error: Failed to create a CUDA device: Operation not permitted
+[2026-06-12 09:36:19.722]: Info: Creating encoder [h264_nvenc]
+[2026-06-12 09:36:19.722]: Info: Color coding: SDR (Rec. 601)
+[2026-06-12 09:36:19.722]: Info: Color depth: 8-bit
+[2026-06-12 09:36:19.722]: Info: Color range: JPEG
+[2026-06-12 09:36:19.722]: Error: [CUDA @ 0x555d37aa1ac0] Cannot load libcuda.so.1
+[2026-06-12 09:36:19.722]: Error: [CUDA @ 0x555d37aa1ac0] Could not dynamically load CUDA
+[2026-06-12 09:36:19.722]: Error: Failed to create a CUDA device: Operation not permitted
+[2026-06-12 09:36:19.722]: Info: Encoder [nvenc] failed
+[2026-06-12 09:36:19.722]: Info: Trying encoder [vulkan]
+[2026-06-12 09:36:19.722]: Info: Screencasting with Wayland's protocol
+[2026-06-12 09:36:19.722]: Error: [wlgrab] Could not initialize display with the given hw device type.
+[2026-06-12 09:36:19.920]: Info: Screencasting with Wayland's protocol
+[2026-06-12 09:36:19.920]: Error: [wlgrab] Could not initialize display with the given hw device type.
+[2026-06-12 09:36:20.120]: Info: Encoder [vulkan] failed
+[2026-06-12 09:36:20.121]: Info: Trying encoder [vaapi]
+[2026-06-12 09:36:20.121]: Info: Screencasting with Wayland's protocol
+[2026-06-12 09:36:20.121]: Info: [wlgrab] Requested frame rate [60/1, approx. 60 fps]
+[2026-06-12 09:36:20.121]: Info: [wayland] Found display [wayland-1]
+[2026-06-12 09:36:20.121]: Info: [wayland] Found interface: zxdg_output_manager_v1(9) version 3
+[2026-06-12 09:36:20.121]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(58) version 3
+[2026-06-12 09:36:20.121]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(67) version 5
+[2026-06-12 09:36:20.121]: Info: [wayland] Found interface: wl_output(68) version 4
+[2026-06-12 09:36:20.121]: Info: [wayland] Resolution: 1920x1080
+[2026-06-12 09:36:20.121]: Info: [wayland] Name: HDMI-A-1
+[2026-06-12 09:36:20.121]: Info: [wayland] Found monitor: Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)
+[2026-06-12 09:36:20.121]: Info: [wayland] Offset: 0x0
+[2026-06-12 09:36:20.121]: Info: [wayland] Logical size: 1920x1080
+[2026-06-12 09:36:20.121]: Info: [wlgrab] Selected monitor [Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)] for streaming
+[2026-06-12 09:36:20.121]: Info: Creating encoder [h264_vaapi]
+[2026-06-12 09:36:20.121]: Info: Color coding: SDR (Rec. 601)
+[2026-06-12 09:36:20.121]: Info: Color depth: 8-bit
+[2026-06-12 09:36:20.121]: Info: Color range: JPEG
+[2026-06-12 09:36:20.132]: Info: EGL: context priority set to HIGH
+[2026-06-12 09:36:20.137]: Info: vaapi vendor: Mesa Gallium driver 26.1.2-arch2.1 for AMD Radeon RX 9060 XT (radeonsi, gfx1200, ACO, DRM 3.64, 6.18.33-2-cachyos-lts)
+[2026-06-12 09:36:20.138]: Info: Streaming bitrate is 1000000
+[2026-06-12 09:36:20.138]: Info: Using normal encoding mode
+[2026-06-12 09:36:20.138]: Info: Using default rate control
+[2026-06-12 09:36:20.161]: Info: Creating encoder [hevc_vaapi]
+[2026-06-12 09:36:20.161]: Info: Color coding: SDR (Rec. 601)
+[2026-06-12 09:36:20.161]: Info: Color depth: 8-bit
+[2026-06-12 09:36:20.161]: Info: Color range: JPEG
+[2026-06-12 09:36:20.168]: Info: EGL: context priority set to HIGH
+[2026-06-12 09:36:20.173]: Info: vaapi vendor: Mesa Gallium driver 26.1.2-arch2.1 for AMD Radeon RX 9060 XT (radeonsi, gfx1200, ACO, DRM 3.64, 6.18.33-2-cachyos-lts)
+[2026-06-12 09:36:20.173]: Info: Streaming bitrate is 1000000
+[2026-06-12 09:36:20.173]: Info: Using normal encoding mode
+[2026-06-12 09:36:20.173]: Info: Using default rate control
+[2026-06-12 09:36:20.187]: Info: Creating encoder [av1_vaapi]
+[2026-06-12 09:36:20.187]: Info: Color coding: SDR (Rec. 601)
+[2026-06-12 09:36:20.187]: Info: Color depth: 8-bit
+[2026-06-12 09:36:20.187]: Info: Color range: JPEG
+[2026-06-12 09:36:20.193]: Info: EGL: context priority set to HIGH
+[2026-06-12 09:36:20.197]: Info: vaapi vendor: Mesa Gallium driver 26.1.2-arch2.1 for AMD Radeon RX 9060 XT (radeonsi, gfx1200, ACO, DRM 3.64, 6.18.33-2-cachyos-lts)
+[2026-06-12 09:36:20.198]: Info: Streaming bitrate is 1000000
+[2026-06-12 09:36:20.198]: Info: Using normal encoding mode
+[2026-06-12 09:36:20.198]: Info: Using VBR with single frame VBV size
+[2026-06-12 09:36:20.198]: Warning: [av1_vaapi @ 0x555d37a85a80] Multiple slices were requested but this codec does not support controlling slices.
+[2026-06-12 09:36:20.209]: Info: Screencasting with Wayland's protocol
+[2026-06-12 09:36:20.210]: Info: [wlgrab] Requested frame rate [60/1, approx. 60 fps]
+[2026-06-12 09:36:20.210]: Info: [wayland] Found display [wayland-1]
+[2026-06-12 09:36:20.210]: Info: [wayland] Found interface: zxdg_output_manager_v1(9) version 3
+[2026-06-12 09:36:20.210]: Info: [wayland] Found interface: zwlr_screencopy_manager_v1(58) version 3
+[2026-06-12 09:36:20.210]: Info: [wayland] Found interface: zwp_linux_dmabuf_v1(67) version 5
+[2026-06-12 09:36:20.210]: Info: [wayland] Found interface: wl_output(68) version 4
+[2026-06-12 09:36:20.210]: Info: [wayland] Resolution: 1920x1080
+[2026-06-12 09:36:20.210]: Info: [wayland] Name: HDMI-A-1
+[2026-06-12 09:36:20.210]: Info: [wayland] Found monitor: Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)
+[2026-06-12 09:36:20.210]: Info: [wayland] Offset: 0x0
+[2026-06-12 09:36:20.210]: Info: [wayland] Logical size: 1920x1080
+[2026-06-12 09:36:20.210]: Info: [wlgrab] Selected monitor [Kingston Tech Corporation EPI3241 0x00000242 (HDMI-A-1)] for streaming
+[2026-06-12 09:36:20.210]: Info: Creating encoder [hevc_vaapi]
+[2026-06-12 09:36:20.210]: Info: Color coding: SDR (Rec. 709)
+[2026-06-12 09:36:20.210]: Info: Color depth: 10-bit
+[2026-06-12 09:36:20.210]: Info: Color range: JPEG
+[2026-06-12 09:36:20.216]: Info: EGL: context priority set to HIGH
+[2026-06-12 09:36:20.221]: Info: vaapi vendor: Mesa Gallium driver 26.1.2-arch2.1 for AMD Radeon RX 9060 XT (radeonsi, gfx1200, ACO, DRM 3.64, 6.18.33-2-cachyos-lts)
+[2026-06-12 09:36:20.222]: Info: Streaming bitrate is 1000000
+[2026-06-12 09:36:20.222]: Info: Using normal encoding mode
+[2026-06-12 09:36:20.222]: Info: Using default rate control
+[2026-06-12 09:36:20.236]: Info: Creating encoder [av1_vaapi]
+[2026-06-12 09:36:20.236]: Info: Color coding: SDR (Rec. 709)
+[2026-06-12 09:36:20.236]: Info: Color depth: 10-bit
+[2026-06-12 09:36:20.236]: Info: Color range: JPEG
+[2026-06-12 09:36:20.242]: Info: EGL: context priority set to HIGH
+[2026-06-12 09:36:20.246]: Info: vaapi vendor: Mesa Gallium driver 26.1.2-arch2.1 for AMD Radeon RX 9060 XT (radeonsi, gfx1200, ACO, DRM 3.64, 6.18.33-2-cachyos-lts)
+[2026-06-12 09:36:20.247]: Info: Streaming bitrate is 1000000
+[2026-06-12 09:36:20.247]: Info: Using normal encoding mode
+[2026-06-12 09:36:20.247]: Info: Using VBR with single frame VBV size
+[2026-06-12 09:36:20.247]: Warning: [av1_vaapi @ 0x555d37a85a80] Multiple slices were requested but this codec does not support controlling slices.
+[2026-06-12 09:36:20.259]: Info: 
+[2026-06-12 09:36:20.259]: Info: // Ignore any errors mentioned above, they are not relevant. //
+[2026-06-12 09:36:20.259]: Info: 
+[2026-06-12 09:36:20.259]: Info: Found H.264 encoder: h264_vaapi [vaapi]
+[2026-06-12 09:36:20.259]: Info: Found HEVC encoder: hevc_vaapi [vaapi]
+[2026-06-12 09:36:20.259]: Info: Found AV1 encoder: av1_vaapi [vaapi]
+[2026-06-12 09:36:20.260]: Info: Starting system tray
+[2026-06-12 09:36:20.260]: Fatal: Couldn't bind RTSP server to port [48010], Address already in use
+[2026-06-12 09:36:20.261]: Error: Failed to create client: Daemon not running
+[2026-06-12 09:36:20.280]: Info: System tray created
+[2026-06-12 09:36:20.280]: Info: Starting main loop
