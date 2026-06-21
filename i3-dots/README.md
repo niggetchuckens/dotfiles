@@ -29,14 +29,14 @@ Choose your preferred configuration profile and run the corresponding installati
 ### Option A: Minimalist Setup (Recommended for low-end CPUs)
 To install the lightweight profile with no compositing overhead:
 ```bash
-cd dotfiles/i3-dots/minimalist-config
+cd i3-dots/minimalist-config
 python3 install.py
 ```
 
 ### Option B: Fancy Setup (With shadows, blur, and rounded corners)
 To install the visually rich profile with window effects:
 ```bash
-cd dotfiles/i3-dots/fancy-config
+cd i3-dots/fancy-config
 python3 install.py
 ```
 

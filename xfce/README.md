@@ -41,14 +41,14 @@ Choose your preferred configuration profile and run the corresponding installati
 ### Option A: Minimalist Setup (Recommended for low-end CPUs or maximum speed)
 To install the lightweight profile with no compositing overhead and instant window manipulation:
 ```bash
-cd dotfiles/xfce/minimalist-config
+cd xfce/minimalist-config
 python3 install.py
 ```
 
 ### Option B: Fancy Setup (With shadows, transparent terminal, and title borders)
 To install the visually rich profile:
 ```bash
-cd dotfiles/xfce/fancy-config
+cd xfce/fancy-config
 python3 install.py
 ```
 
