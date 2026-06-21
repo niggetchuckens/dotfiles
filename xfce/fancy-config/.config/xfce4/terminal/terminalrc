@@ -1,0 +1,13 @@
+[Configuration]
+ColorPalette=rgb(30,30,46);rgb(243,139,168);rgb(166,227,161);rgb(249,226,175);rgb(137,180,250);rgb(245,194,231);rgb(148,226,213);rgb(166,173,200);rgb(88,91,112);rgb(243,139,168);rgb(166,227,161);rgb(249,226,175);rgb(137,180,250);rgb(245,194,231);rgb(148,226,213);rgb(166,173,200)
+ColorBackground=rgb(30,30,46)
+ColorForeground=rgb(205,214,244)
+ColorCursor=rgb(245,224,220)
+FontName=JetBrainsMono Nerd Font 10
+FontUseSystem=FALSE
+ScrollingBar=TERMINAL_SCROLLBAR_NONE
+ScrollingUnlimited=TRUE
+MiscAlwaysShowTabs=FALSE
+MiscShowMenuBar=FALSE
+MiscShowToolbar=FALSE
+MiscShowBorders=TRUE
