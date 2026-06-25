@@ -58,20 +58,20 @@ dotfiles/
 
 ## 🖼️ Desktop Environments & WMs
 
-### 1. [Hyprland Dotfiles](file:///home/hime/dotfiles/hyprland-dots/README.md)
+### 1. [Hyprland Dotfiles](file://~/dotfiles/hyprland-dots/README.md)
 * **Fancy**: Dual-kawase blur, rounded corners, drop shadows, window animations.
 * **Minimalist**: Minimal CPU overhead, animations off, optimized for high refresh rates.
-* Read the [Hyprland Guide](file:///home/hime/dotfiles/hyprland-dots/README.md) for screenshots, keybindings, and troubleshooting.
+* Read the [Hyprland Guide](file://~/dotfiles/hyprland-dots/README.md) for screenshots, keybindings, and troubleshooting.
 
-### 2. [i3 Window Manager Dotfiles](file:///home/hime/dotfiles/i3-dots/README.md)
+### 2. [i3 Window Manager Dotfiles](file://~/dotfiles/i3-dots/README.md)
 * **Fancy**: i3 status bar with custom picom config (fade-in, transparent terminal).
 * **Minimalist**: Clean, fast X11 tiling layout with maximum efficiency.
-* Read the [i3 WM Guide](file:///home/hime/dotfiles/i3-dots/README.md) for details.
+* Read the [i3 WM Guide](file://~/dotfiles/i3-dots/README.md) for details.
 
-### 3. [XFCE4 Desktop Dotfiles](file:///home/hime/dotfiles/xfce/README.md)
+### 3. [XFCE4 Desktop Dotfiles](file://~/dotfiles/xfce/README.md)
 * **Fancy**: A customized modern panel layout with Catppuccin accents and terminal transparency.
 * **Minimalist**: Clean traditional desktop layout, optimized for low memory usage and maximum performance.
-* Read the [XFCE4 Guide](file:///home/hime/dotfiles/xfce/README.md) for details.
+* Read the [XFCE4 Guide](file://~/dotfiles/xfce/README.md) for details.
 
 ---
 

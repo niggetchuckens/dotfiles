@@ -29,6 +29,24 @@ FONT_PACKAGE_MAP = {
     'feather': 'ttf-font-awesome',
 }
 
+FONT_PACKAGE_MAP_DNF = {
+    'JetBrains Mono': 'jetbrains-mono-fonts',
+    'JetBrainsMono Nerd Font': 'jetbrains-mono-fonts',
+    'Hack': 'google-noto-sans-mono-fonts', 
+    'Iosevka': 'iosevka-fonts',
+    'Noto Sans': 'google-noto-sans-fonts',
+    'Noto Serif': 'google-noto-serif-fonts',
+    'Noto Sans CJK': 'google-noto-sans-cjk-fonts',
+    'Noto Serif CJK': 'google-noto-serif-cjk-fonts',
+    'Noto Sans Mono': 'google-noto-sans-mono-fonts',
+    'Noto Color Emoji': 'google-noto-emoji-color-fonts',
+    'Roboto': 'google-roboto-fonts',
+    'Source Han Sans': 'adobe-source-han-sans-jp-fonts',
+    'Source Han Serif': 'adobe-source-han-serif-jp-fonts',
+    'Adwaita': 'abattis-cantarell-fonts',
+    'feather': 'fontawesome-fonts',
+}
+
 def detect_package_manager():
     """Detect which package manager is available"""
     managers = {
@@ -55,13 +73,14 @@ def read_fonts_list(fonts_md_path):
                 fonts.add(font_name)
     return sorted(fonts)
 
-def get_packages_to_install(fonts):
+def get_packages_to_install(fonts, pkg_manager):
     """Map font names to package names"""
     packages = set()
+    map_to_use = FONT_PACKAGE_MAP_DNF if pkg_manager == 'dnf' else FONT_PACKAGE_MAP
     
     for font in fonts:
         # Check if font matches any key in the map
-        for font_key, package_names in FONT_PACKAGE_MAP.items():
+        for font_key, package_names in map_to_use.items():
             if font.startswith(font_key):
                 packages.update(package_names.split())
                 break
@@ -102,6 +121,38 @@ def install_packages_apt(packages):
         print(f"\n✗ Installation failed: {e}", file=sys.stderr)
         sys.exit(1)
 
+def install_packages_dnf(packages):
+    """Install packages using dnf"""
+    if not packages:
+        print("No packages to install")
+        return
+    
+    print(f"Installing {len(packages)} font packages with dnf...")
+    print(f"Packages: {', '.join(packages)}\n")
+    
+    cmd = ['sudo', 'dnf', 'install', '-y', '--skip-unavailable'] + packages
+    try:
+        subprocess.run(cmd, check=True)
+        print("\n✓ Fonts from DNF installed successfully!")
+    except subprocess.CalledProcessError as e:
+        print(f"\n✗ Installation failed: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    print("\nInstalling Nerd Fonts manually for Fedora...")
+    fonts_dir = Path.home() / ".local" / "share" / "fonts" / "NerdFonts"
+    fonts_dir.mkdir(parents=True, exist_ok=True)
+    
+    zip_path = fonts_dir / "JetBrainsMono.zip"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip"
+    
+    try:
+        subprocess.run(["wget", "-q", "--show-progress", url, "-O", str(zip_path)], check=True)
+        subprocess.run(["unzip", "-q", "-o", str(zip_path), "-d", str(fonts_dir)], check=True)
+        zip_path.unlink(missing_ok=True)
+        print("✓ JetBrainsMono Nerd Font installed successfully!")
+    except Exception as e:
+        print(f"✗ Failed to install Nerd Fonts manually: {e}", file=sys.stderr)
+
 def main():
     # Find FONTS.md
     script_dir = Path(__file__).parent
@@ -124,7 +175,7 @@ def main():
     print(f"Detected package manager: {pkg_manager}\n")
     
     # Map fonts to packages
-    packages = get_packages_to_install(fonts)
+    packages = get_packages_to_install(fonts, pkg_manager)
     
     if not packages:
         print("Warning: No font packages could be mapped from FONTS.md")
@@ -144,6 +195,8 @@ def main():
         install_packages_pacman(packages)
     elif pkg_manager == 'apt':
         install_packages_apt(packages)
+    elif pkg_manager == 'dnf':
+        install_packages_dnf(packages)
     else:
         print(f"Package manager {pkg_manager} not yet supported in this script")
         sys.exit(1)

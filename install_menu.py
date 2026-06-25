@@ -16,6 +16,18 @@ MAGENTA = "\033[35m"
 RED = "\033[31m"
 BG_SELECT = "\033[44m\033[37m" # Blue bg, white fg for selected list item
 
+def get_os_id():
+    try:
+        with open("/etc/os-release") as f:
+            for line in f:
+                if line.startswith("ID="):
+                    return line.strip().split('=')[1].strip('"')
+    except Exception:
+        pass
+    return "unknown"
+
+OS_ID = get_os_id()
+
 # ASCII Previews for layouts
 ASCII_HYPR_FANCY = """
   ┌────────────────────────────────────────────────────────┐
@@ -184,7 +196,7 @@ def get_key():
     return None
 
 def clear_screen():
-    print("\033[2J\033[H", end="")
+    os.system("clear")
 
 def print_menu(selected_idx):
     clear_screen()
@@ -192,6 +204,10 @@ def print_menu(selected_idx):
     # Splash Banner
     print(f"{BOLD}{BLUE}╔══════════════════════════════════════════════════════════════════════════╗{RESET}")
     print(f"{BOLD}{BLUE}║                   YukiOS Configuration Hub & Installer                   ║{RESET}")
+    os_text = f"[Detected OS: {OS_ID.capitalize()}]"
+    padding = (74 - len(os_text)) // 2
+    os_line = "║" + " " * padding + os_text + " " * (74 - len(os_text) - padding) + "║"
+    print(f"{BOLD}{BLUE}{os_line}{RESET}")
     print(f"{BOLD}{BLUE}╚══════════════════════════════════════════════════════════════════════════╝{RESET}\n")
     print(f"{YELLOW}Use Arrow Keys (↑/↓) to highlight profiles. Press Enter to Install. 'q' to Quit.{RESET}\n")
     
@@ -264,9 +280,11 @@ def main():
                     subprocess.run([sys.executable, script_name], cwd=script_dir, check=True)
                 except subprocess.CalledProcessError as e:
                     print(f"\n{RED}[ERROR] Installation script failed: {e}{RESET}")
+                    input(f"\n{YELLOW}Press Enter to exit...{RESET}")
                     sys.exit(1)
                 except KeyboardInterrupt:
                     print(f"\n{YELLOW}[WARN] Installation cancelled by user.{RESET}")
+                    input(f"\n{YELLOW}Press Enter to exit...{RESET}")
                     sys.exit(0)
                 break
             elif key == 'quit':

@@ -5,12 +5,12 @@
             "cmd": "",
             "exclude-global-prep-cmd": false,
             "exit-timeout": 5,
-            "image-path": "/home/hime/.config/sunshine/icons/desktop.jpg",
+            "image-path": "~/.config/sunshine/icons/desktop.jpg",
             "name": "Desktop",
             "prep-cmd": [
                 {
-                    "do": "/home/hime/.config/sunshine/scripts/set_resolution.sh",
-                    "undo": "/home/hime/.config/sunshine/scripts/reset_resolution.sh"
+                    "do": "~/.config/sunshine/scripts/set_resolution.sh",
+                    "undo": "~/.config/sunshine/scripts/reset_resolution.sh"
                 }
             ],
             "wait-all": true
@@ -24,8 +24,8 @@
             "name": "Visual Studio Code",
             "prep-cmd": [
                 {
-                    "do": "/home/hime/.config/sunshine/scripts/set_resolution.sh",
-                    "undo": "/home/hime/.config/sunshine/scripts/reset_resolution.sh"
+                    "do": "~/.config/sunshine/scripts/set_resolution.sh",
+                    "undo": "~/.config/sunshine/scripts/reset_resolution.sh"
                 }
             ]
         },
@@ -40,8 +40,8 @@
             "name": "Steam Big Picture",
             "prep-cmd": [
                 {
-                    "do": "/home/hime/.config/sunshine/scripts/set_resolution.sh",
-                    "undo": "/home/hime/.config/sunshine/scripts/reset_resolution.sh"
+                    "do": "~/.config/sunshine/scripts/set_resolution.sh",
+                    "undo": "~/.config/sunshine/scripts/reset_resolution.sh"
                 },
                 {
                     "do": "",

@@ -8,4 +8,4 @@ DYNAMIC_NAME=$(hyprctl monitors | grep "Monitor HEADLESS" | awk '{print $2}')
 hyprctl keyword monitor "$DYNAMIC_NAME,2160x1620@60,auto,1"
 hyprctl dispatch moveworkspacetomonitor 9 "$DYNAMIC_NAME"
 hyprctl dispatch "[workspace 9] code"
-code /home/hime/code
+code ~/code
