@@ -86,4 +86,19 @@ Make sure you have `python3` installed to run the setup menu:
 
 ---
 
+## 🛠️ Troubleshooting
+
+### Chromium-Based Browsers (Brave, Discord, Chrome) Losing Sessions
+If you install this repository over a system that already has a Desktop Environment (like KDE Plasma) and you switch between them, applications based on Chromium (like Brave Browser, Discord/Vesktop, Google Chrome) might suddenly lose all their cookies and log you out.
+
+This is a known Chromium security feature when it detects the Secret Service (`kwallet` vs `gnome-keyring`) changing between desktop sessions.
+* **The Fix**: Force the browser to use a local or standard password store. Copy the `.desktop` file to your local applications and add the `--password-store=basic` flag (or `--password-store=gnome` for KDE Plasma 6 compatibility).
+  ```bash
+  cp /usr/share/applications/brave-browser.desktop ~/.local/share/applications/
+  # Edit the file and append the flag to the Exec lines:
+  # Exec=/usr/bin/brave-browser-stable --password-store=basic %U
+  ```
+
+---
+
 **⭐ If you find these dotfiles useful, consider giving this repo a star!**
