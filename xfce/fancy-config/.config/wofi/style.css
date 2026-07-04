@@ -1,0 +1,31 @@
+/* ~/.config/wofi/style.css */
+window {
+    margin: 0px;
+    background-color: rgba(30, 30, 30, 0.9); /* macOS dark transparency */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    font-family: "SF Pro Display", "Inter", sans-serif;
+}
+
+#inner-box {
+    margin: 10px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background-color: #007AFF; /* macOS Blue */
+    border-radius: 10px;
+}
+
+#text {
+    margin: 5px;
+    color: white;
+}
+
+#input {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    margin-bottom: 10px;
+}

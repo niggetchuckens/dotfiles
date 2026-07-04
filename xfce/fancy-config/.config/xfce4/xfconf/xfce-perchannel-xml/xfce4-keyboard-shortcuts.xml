@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channel name="xfce4-keyboard-shortcuts" version="1.0">
+  <property name="commands" type="empty">
+    <property name="custom" type="empty">
+      <property name="&lt;Alt&gt;Return" type="string" value="kitty"/>
+      <property name="&lt;Alt&gt;w" type="string" value="rofi -show drun"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;w" type="string" value="rofi -show run"/>
+      <property name="&lt;Super&gt;&lt;Shift&gt;s" type="string" value="maim -s | xclip -selection clipboard -t image/png"/>
+      <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xflock4"/>
+      <property name="&lt;Alt&gt;m" type="string" value="bash -c $HOME/.config/rofi/scripts/powermenu_t3"/>
+      <property name="&lt;Alt&gt;F2" type="string" value="xfce4-appfinder --collapsed"/>
+      <property name="&lt;Alt&gt;F3" type="string" value="xfce4-appfinder"/>
+    </property>
+  </property>
+  <property name="xfwm4" type="empty">
+    <property name="custom" type="empty">
+      <property name="&lt;Alt&gt;q" type="string" value="close_window_key"/>
+      <property name="&lt;Alt&gt;f" type="string" value="fullscreen_key"/>
+      <property name="&lt;Alt&gt;v" type="string" value="stick_window_key"/>
+      <property name="&lt;Alt&gt;space" type="string" value="popup_menu_key"/>
+      <property name="&lt;Super&gt;Left" type="string" value="tile_left_key"/>
+      <property name="&lt;Super&gt;Right" type="string" value="tile_right_key"/>
+      <property name="&lt;Super&gt;Up" type="string" value="tile_up_key"/>
+      <property name="&lt;Super&gt;Down" type="string" value="tile_down_key"/>
+      <property name="&lt;Alt&gt;Tab" type="string" value="cycle_windows_key"/>
+      <property name="&lt;Alt&gt;1" type="string" value="workspace_1_key"/>
+      <property name="&lt;Alt&gt;2" type="string" value="workspace_2_key"/>
+      <property name="&lt;Alt&gt;3" type="string" value="workspace_3_key"/>
+      <property name="&lt;Alt&gt;4" type="string" value="workspace_4_key"/>
+      <property name="&lt;Alt&gt;5" type="string" value="workspace_5_key"/>
+      <property name="&lt;Alt&gt;6" type="string" value="workspace_6_key"/>
+      <property name="&lt;Alt&gt;7" type="string" value="workspace_7_key"/>
+      <property name="&lt;Alt&gt;8" type="string" value="workspace_8_key"/>
+      <property name="&lt;Alt&gt;9" type="string" value="workspace_9_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;exclam" type="string" value="move_window_workspace_1_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;at" type="string" value="move_window_workspace_2_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;numbersign" type="string" value="move_window_workspace_3_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;dollar" type="string" value="move_window_workspace_4_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;percent" type="string" value="move_window_workspace_5_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;asciicircum" type="string" value="move_window_workspace_6_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;ampersand" type="string" value="move_window_workspace_7_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;asterisk" type="string" value="move_window_workspace_8_key"/>
+      <property name="&lt;Alt&gt;&lt;Shift&gt;parenleft" type="string" value="move_window_workspace_9_key"/>
+    </property>
+  </property>
+</channel>

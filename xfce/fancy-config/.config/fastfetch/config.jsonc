@@ -1,0 +1,77 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "source": "~/.config/fastfetch/images/yuki.png", // From your image_source
+        "width": 28, // Approximation of your 220px size
+        "padding": {
+            "top": 2,
+            "left": 2
+        }
+    },
+    "display": {
+        "separator": " ", // You had separator="" which removes the colon
+        "color": "magenta" // Matches your "pink" theme
+    },
+    "modules": [
+        {
+            "type": "custom",
+            "format": " "
+        },
+        {
+            "type": "custom",
+            "key": " "
+        },
+        {
+            "type": "custom",
+            "format": " "
+        },
+        {
+            "type": "custom",
+            "format": "_____________________"
+        },
+        {
+            "type": "os",
+            "key": "Os",
+            "format": "YukiOS" // Hardcoded as per your 'prin Os YukiOS'
+        },
+        {
+            "type": "cpu",
+            "key": "Cpu"
+        },
+        {
+            "type": "gpu",
+            "key": "Gpu"
+        },
+        {
+            "type": "memory",
+            "key": "Ram"
+        },
+        {
+            "type": "packages",
+            "key": "Pkgs"
+        },
+        {
+            "type": "terminal",
+            "key": "Terminal"
+        },
+        {
+            "type": "wm",
+            "key": "WM"
+        },
+        {
+            "type": "uptime",
+            "key": "Uptime"
+        },
+        {
+            "type": "colors",
+            "symbol": "rect",
+            "block": {
+                "range": [1, 7]
+            }
+        },
+        {
+            "type": "custom",
+            "format": "_____________________"
+        }
+    ]
+}

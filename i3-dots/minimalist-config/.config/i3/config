@@ -1,0 +1,167 @@
+# i3 config file (v4)
+# Ported from Hyprland configuration (Minimalist & Optimized)
+
+# Mod key
+set $mod Mod1
+
+# Font for window titles and bar
+font pango:JetBrains Mono Nerd Font 10
+
+# Catppuccin Mocha colors
+set $rosewater #f5e0dc
+set $flamingo  #f2cdcd
+set $pink      #f5c2e7
+set $mauve     #cba6f7
+set $red       #f38ba8
+set $maroon    #eba0ac
+set $peach     #fab387
+set $yellow    #f9e2af
+set $green     #a6e3a1
+set $teal      #94e2d5
+set $sky       #89dceb
+set $sapphire  #74c7ec
+set $blue      #89b4fa
+set $lavender  #b4befe
+set $text      #cdd6f4
+set $subtext1  #bac2de
+set $subtext0  #a6adc8
+set $overlay2  #9399b2
+set $overlay1  #7f849c
+set $overlay0  #6c7086
+set $surface2  #585b70
+set $surface1  #45475a
+set $surface0  #313244
+set $base      #1e1e2e
+set $mantle    #181825
+set $crust     #11111b
+
+# Window border colors
+# class                 border    backgr.   text      indicator child_border
+client.focused          $mauve    $base     $text     $rosewater $mauve
+client.focused_inactive $surface1 $base     $subtext1 $rosewater $surface1
+client.unfocused        $surface1 $base     $subtext1 $rosewater $surface1
+client.urgent           $red      $base     $text     $rosewater $red
+client.placeholder      $surface0 $base     $text     $rosewater $surface0
+client.background       $base
+
+# Configure borders
+default_border pixel 2
+default_floating_border normal 2
+hide_edge_borders none
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Keybindings
+bindsym $mod+Return exec kitty
+bindsym $mod+Shift+a exec ani-cli --rofi
+bindsym $mod+Shift+y exec ~/.config/hypr/scripts/youtube.sh
+bindsym $mod+q kill
+bindsym $mod+f fullscreen toggle
+bindsym $mod+m exec ~/.config/rofi/scripts/powermenu_t3
+bindsym $mod+e exec nautilus
+bindsym $mod+v floating toggle
+bindsym $mod+w exec rofi -show drun
+bindsym $mod+p exec ~/.config/hypr/scripts/display-manager.sh
+bindsym $mod+Shift+w exec rofi -show run
+bindsym $mod+Shift+d exec discord
+bindsym $mod+Shift+x exec brave
+bindsym $mod+z exec clipmenu # standard lightweight clipboard menu for X11
+
+# Screenshot: Mod+Shift+S (requires maim and xclip)
+bindsym Mod4+Shift+s exec "maim -s | xclip -selection clipboard -t image/png"
+
+# Change focus
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move focused window
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Media Keys control (Volume, Mic, Brightness)
+bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl -e4 -n2 set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl -e4 -n2 set 5%-
+
+# Playerctl
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+
+# Reload / restart i3
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+
+# Autostart applications
+exec_once --no-startup-id kitty
+exec --no-startup-id feh --bg-fill ~/.config/hypr/wallpapers/kanagawa.png
+exec --no-startup-id dunst
+exec --no-startup-id greenclip daemon & # clipboard daemon for rofi on X11
+exec --no-startup-id gnome-keyring-daemon --start --components=secrets
+
+# Gaps configuration for minimalist style
+gaps inner 4
+gaps outer 6
+
+# i3bar configuration
+bar {
+    status_command i3status -c ~/.config/i3status/config
+    position top
+    colors {
+        background $base
+        statusline $text
+        separator  $surface2
+
+        # class            border    bg        text
+        focused_workspace  $mauve    $base     $mauve
+        active_workspace   $surface1 $base     $subtext1
+        inactive_workspace $surface1 $base     $subtext0
+        urgent_workspace   $red      $base     $text
+        binding_mode       $red      $base     $text
+    }
+}

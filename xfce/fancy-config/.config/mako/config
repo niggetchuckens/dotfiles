@@ -1,0 +1,10 @@
+# ~/.config/mako/config
+anchor=top-center
+margin=0
+width=400
+border-radius=12
+background-color=#1e1e2ecc
+border-color=#c531be
+font=CommitMono Nerd Font 11
+default-timeout=5000
+
