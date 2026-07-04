@@ -1,3 +1,4 @@
+import shutil
 import subprocess
 import os
 import argparse
@@ -52,7 +53,6 @@ def main(confirm = None):
     current_user = getpass.getuser()
     user_home = os.path.expanduser("~")
 
-    # YukiOS Splash Screen with yukivim
     print(f"\n{BLUE}╔════════════════════════════════════════════╗{NC}")
     print(f"{BLUE}║           YukiOS dotfiles installer        ║{NC}")
     print(f"{BLUE}╚════════════════════════════════════════════╝{NC}\n")
@@ -60,62 +60,53 @@ def main(confirm = None):
     if confirm is None:
         confirm = input(f"{YELLOW}[?]{NC} Proceed with installation for user '{current_user}'? [y/N]: ")
     if confirm.lower() != 'y': return
-    
-    sunshine_url = 'https://github.com/LizardByte/Sunshine/releases/download/v2026.131.3509/sunshine-2026.131.3509-1-x86_64.pkg.tar.zst'
-        
+
+    # --- 1. Install Packages ---       
     pkgs = (
                 "hyprland wget sddm xdg-desktop-portal-hyprland wayland wl-clipboard xorg-xwayland "
                 "waybar rofi wofi hyprpolkitagent wlogout dunst kitty nautilus grim slurp cliphist "
-                "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol "
-                "playerctl network-manager-applet power-profiles-daemon "
-                "polkit gnome-keyring discord fastfetch neovim pacman-contrib "
-                "ttf-commit-mono-nerd papirus-icon-theme bibata-cursor-theme oh-my-posh"
+                "swaybg brightnessctl pipewire wireplumber pipewire-pulse pavucontrol sunshine portproton "
+                "playerctl network-manager-applet power-profiles-daemon visual=studio-code-bin "
+                "polkit gnome-keyring discord fastfetch neovim pacman-contrib spotify vesktop "
+                "ttf-commit-mono-nerd papirus-icon-theme bibata-cursor-theme oh-my-posh gemini-cli "
+                "tor python-requests python-pysocks psmisc iptables "
             )
-        
-        
+    
+    yay = shutil.which("yay")
+    if not yay:
+        print_info("Installing yay AUR helper...")
+        run_command("sudo pacman -S --needed --noconfirm base-devel git")
+        run_command(f"git clone https://aur.archlinux.org/yay.git /tmp/yay && cd /tmp/yay && makepkg -si --noconfirm")
+        print_success("yay installed successfully.")    
+    
     commands = (   
                 f"yay -Syu --needed --noconfirm {pkgs}",
                 f"export PATH=\"$PATH:{user_home}/.local/bin\""
             )
 
     run_command(command for command in commands)
-        
-    sunshine = input(f"{YELLOW}[?]{NC} Install Sunshine (Game Streaming Server)? [y/N]: ")
-    if sunshine.lower() == 'y':
-        print_info("Installing Sunshine...")
-        sunshine_commands = (
-            f"wget {sunshine_url} -O {user_home}/sunshine.pkg.tar.zst",
-            f"sudo pacman -U {user_home}/sunshine.pkg.tar.zst --noconfirm",
-            f"rm {user_home}/sunshine.pkg.tar.zst",
-            "systemctl --user enable sunshine") # Enable sunshine service for github build bc the yay installation need lots of ram (my 16gb can't match that :c )
-        run_command(command for command in sunshine_commands)
    
 
     # --- 2. Deploy Dotfiles ---
+    
     for folder in [".config", ".local", ".scripts"]:
         os.makedirs(os.path.join(user_home, folder), exist_ok=True)
         copy_folder(folder)
         copy_file(".bashrc")
 
-    # --- 3. Environment Variables, Alias & Fonts ---
-    # Values taken from APPS.md "Environment Variables" section
-    
     install_fonts.main()
 
-    # --- 4. Enable Services ---
-    # User-level services from APPS.md
-    user_services = ["hyprpolkitagent", "pipewire", "wireplumber"]
-    for svc in user_services:
-        try:
-            run_command(f"systemctl --user enable {svc}.service")
-        except: pass
+    # --- 3. Enable Services ---
 
-    # System-level services
-    system_services = ["sddm", "NetworkManager", "power-profiles-daemon", "tlp-pd"]
+    system_services = ["sddm", "NetworkManager", "power-profiles-daemon", "tailscaled", "avahi-daemon"]
     for svc in system_services:
         try:
             run_command(f"sudo systemctl enable {svc}.service")
         except: pass
+
+    try:
+        run_command("systemctl --user enable sunshine-boot.service")
+    except: pass
 
     # --- 5. System Configuration ---
     print_info("Configuring system time and timezone...")

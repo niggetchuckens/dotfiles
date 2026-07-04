@@ -1,0 +1,12 @@
+[Unit]
+Description=Sunshine Game Stream Server (Boot)
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+ExecStart=/usr/bin/sunshine
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

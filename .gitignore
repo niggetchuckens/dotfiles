@@ -2,6 +2,8 @@
 # Sensitive files
 .config/sunshine/credentials/
 .config/sunshine/sunshine_state.json
+.config/sunshine/sunshine.log
+.config/sunshine/sunshine.conf.backup
 .local/share/recently-used.xbel
 .local/share/keyrings/
 .ssh/
