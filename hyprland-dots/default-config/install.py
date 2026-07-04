@@ -119,6 +119,14 @@ def main(confirm = None):
         run_command("systemctl --user enable sunshine-boot.service")
     except: pass
 
+    # Mask notification daemons to avoid DBus auto-start conflicts
+    try:
+        run_command("systemctl --user mask dunst mako")
+        run_command("mkdir -p ~/.local/share/dbus-1/services")
+        run_command("ln -sf /dev/null ~/.local/share/dbus-1/services/org.knopwob.dunst.service")
+        run_command("ln -sf /dev/null ~/.local/share/dbus-1/services/fr.emersion.mako.service")
+    except: pass
+
     # --- 5. System Configuration ---
     print_info("Configuring system time and timezone...")
     try:
