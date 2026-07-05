@@ -135,6 +135,11 @@ def main(confirm = None):
 
     mod_choice = input(f"{YELLOW}[?]{NC} Choose main modifier key (a=ALT, s=SUPER) [a/S]: ").strip().lower()
     main_mod = "ALT" if mod_choice == 'a' else "SUPER"
+
+    kb_choice = input(f"{YELLOW}[?]{NC} Choose keyboard layout (1=US English, 2=Spanish, 3=Latin American) [1/2/3]: ").strip()
+    if kb_choice == '2': kb_layout = 'es'
+    elif kb_choice == '3': kb_layout = 'latam'
+    else: kb_layout = 'us'
     # --- 2. Deploy Dotfiles ---
     for folder in [".config", ".local", ".scripts"]:
         os.makedirs(os.path.join(user_home, folder), exist_ok=True)
@@ -142,6 +147,12 @@ def main(confirm = None):
         copy_file(".bashrc")
 
     # Patch main modifier key
+
+    # Patch keyboard layout
+    i3_config = os.path.join(user_home, ".config", "i3", "config")
+    if os.path.exists(i3_config):
+        with open(i3_config, 'a') as f: 
+            f.write(f"\n# Set keyboard layout\nexec_always --no-startup-id setxkbmap {kb_layout}\n")
     i3_config = os.path.join(user_home, ".config", "i3", "config")
     if os.path.exists(i3_config):
         with open(i3_config, 'r') as f: content = f.read()

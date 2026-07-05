@@ -156,6 +156,11 @@ def main(confirm = None):
 
     mod_choice = input(f"{YELLOW}[?]{NC} Choose main modifier key (a=ALT, s=SUPER) [a/S]: ").strip().lower()
     main_mod = "ALT" if mod_choice == 'a' else "SUPER"
+
+    kb_choice = input(f"{YELLOW}[?]{NC} Choose keyboard layout (1=US English, 2=Spanish, 3=Latin American) [1/2/3]: ").strip()
+    if kb_choice == '2': kb_layout = 'es'
+    elif kb_choice == '3': kb_layout = 'latam'
+    else: kb_layout = 'us'
     # --- 2. Deploy Dotfiles ---
     # Stop Xfconfd to prevent XFCE session from overwriting XML files on log out
     print_info("Stopping xfconfd before deploying new configs...")
@@ -170,6 +175,19 @@ def main(confirm = None):
         copy_file(".bashrc")
 
     # Patch main modifier key
+
+    # Patch keyboard layout
+    xfce_kb = os.path.join(user_home, ".config", "xfce4", "xfconf", "xfce-perchannel-xml", "keyboard-layout.xml")
+    os.makedirs(os.path.dirname(xfce_kb), exist_ok=True)
+    with open(xfce_kb, 'w') as f:
+        f.write(f'''<?xml version="1.0" encoding="UTF-8"?>
+<channel name="keyboard-layout" version="1.0">
+  <property name="Default" type="empty">
+    <property name="XkbDisable" type="bool" value="false"/>
+    <property name="XkbLayout" type="string" value="{kb_layout}"/>
+    <property name="XkbVariant" type="string" value=""/>
+  </property>
+</channel>''')
     xfce_keys = os.path.join(user_home, ".config", "xfce4", "xfconf", "xfce-perchannel-xml", "xfce4-keyboard-shortcuts.xml")
     if os.path.exists(xfce_keys):
         with open(xfce_keys, 'r') as f: content = f.read()
