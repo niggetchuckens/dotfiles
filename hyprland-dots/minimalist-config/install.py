@@ -145,11 +145,21 @@ def main(confirm = None):
             run_command(command)
    
 
+
+    mod_choice = input(f"{YELLOW}[?]{NC} Choose main modifier key (a=ALT, s=SUPER) [a/S]: ").strip().lower()
+    main_mod = "ALT" if mod_choice == 'a' else "SUPER"
     # --- 2. Deploy Dotfiles ---
     for folder in [".config", ".local", ".scripts"]:
         os.makedirs(os.path.join(user_home, folder), exist_ok=True)
         copy_folder(folder)
         copy_file(".bashrc")
+
+    # Patch main modifier key
+    keybind_conf = os.path.join(user_home, ".config", "hypr", "configs", "keybind.conf")
+    if os.path.exists(keybind_conf):
+        with open(keybind_conf, 'r') as f: content = f.read()
+        content = content.replace("$mod = SUPER", f"$mod = {main_mod}").replace("$mod = ALT", f"$mod = {main_mod}")
+        with open(keybind_conf, 'w') as f: f.write(content)
 
     if OS_ID == "fedora":
         print_info("Adapting autostart.conf for Fedora (Polkit & GTK Themes)...")

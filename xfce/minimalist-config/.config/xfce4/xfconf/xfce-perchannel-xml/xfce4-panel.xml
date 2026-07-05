@@ -2,62 +2,82 @@
 <channel name="xfce4-panel" version="1.0">
   <property name="panels" type="array">
     <value type="int" value="1"/>
-  </property>
-  <property name="panel-1" type="empty">
-    <property name="position" type="string" value="p=6;x=0;y=0"/>
-    <property name="length" type="uint" value="100"/>
-    <property name="position-locked" type="bool" value="true"/>
-    <property name="size" type="uint" value="28"/>
-    <property name="background-style" type="uint" value="0"/>
-    <property name="plugin-ids" type="array">
-      <value type="int" value="1"/>
-      <value type="int" value="2"/>
-      <value type="int" value="3"/>
-      <value type="int" value="4"/>
-      <value type="int" value="5"/>
-      <value type="int" value="6"/>
-      <value type="int" value="7"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="34"/>
+      <property name="background-style" type="uint" value="0"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="1"/>
+        <value type="int" value="9"/>
+        <value type="int" value="3"/>
+        <value type="int" value="4"/>
+        <value type="int" value="5"/>
+        <value type="int" value="6"/>
+        <value type="int" value="7"/>
+        <value type="int" value="8"/>
+      </property>
     </property>
   </property>
   <property name="plugins" type="empty">
+    <!-- Left Module 1: Whiskermenu -->
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="show-button-title" type="bool" value="false"/>
-      <property name="show-generic-names" type="bool" value="true"/>
-      <property name="show-category-names" type="bool" value="true"/>
-      <property name="show-description-tooltip" type="bool" value="false"/>
-      <property name="button-icon" type="string" value="distributor-logo"/>
-      <property name="recent-items-max" type="int" value="5"/>
-      <property name="favorites" type="array">
-        <value type="string" value="kitty.desktop"/>
-        <value type="string" value="firefox.desktop"/>
-        <value type="string" value="thunar.desktop"/>
-      </property>
+      <property name="show-button-icon" type="bool" value="true"/>
+      <property name="button-icon" type="string" value="fedora-logo-icon"/>
     </property>
-    <property name="plugin-2" type="string" value="tasklist">
-      <property name="show-labels" type="bool" value="false"/>
+
+    <!-- Left Module 3: Tasklist (Window List) -->
+    <property name="plugin-9" type="string" value="tasklist">
+      <property name="show-labels" type="bool" value="true"/>
       <property name="grouping" type="bool" value="true"/>
       <property name="sort-order" type="uint" value="1"/>
-      <property name="include-all-monitors" type="bool" value="true"/>
       <property name="flat-buttons" type="bool" value="true"/>
     </property>
+
+    <!-- Left to Center Spacer -->
     <property name="plugin-3" type="string" value="separator">
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-4" type="string" value="systray">
-      <property name="names-ordered" type="array">
-      </property>
-      <property name="size-max" type="uint" value="20"/>
-    </property>
-    <property name="plugin-5" type="string" value="pulseaudio">
-      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="show-notifications" type="bool" value="false"/>
-    </property>
-    <property name="plugin-6" type="string" value="power"/>
-    <property name="plugin-7" type="string" value="clock">
+
+    <!-- Center Module: Clock -->
+    <property name="plugin-4" type="string" value="clock">
       <property name="mode" type="uint" value="2"/>
       <property name="digital-layout" type="uint" value="3"/>
-      <property name="digital-format" type="string" value="%H:%M"/>
+      <property name="digital-format" type="string" value="%I:%M %p"/>
+    </property>
+
+    <!-- Center to Right Spacer -->
+    <property name="plugin-5" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+
+    <!-- Right Module 1: Systray -->
+    <property name="plugin-6" type="string" value="systray">
+      <property name="size-max" type="uint" value="22"/>
+    </property>
+
+    <!-- Right Module 2: Pulseaudio -->
+    <property name="plugin-7" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+    </property>
+
+    <!-- Right Module 3: Actions (Logout) -->
+    <property name="plugin-8" type="string" value="actions">
+      <property name="items" type="array">
+        <value type="string" value="-lock-screen"/>
+        <value type="string" value="-switch-user"/>
+        <value type="string" value="-separator"/>
+        <value type="string" value="-suspend"/>
+        <value type="string" value="-hibernate"/>
+        <value type="string" value="-separator"/>
+        <value type="string" value="-shutdown"/>
+        <value type="string" value="-restart"/>
+        <value type="string" value="+logout"/>
+      </property>
     </property>
   </property>
 </channel>
