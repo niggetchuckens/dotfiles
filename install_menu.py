@@ -110,6 +110,36 @@ ASCII_XFCE_MIN = """
   * Clean layouts, zero transparency, solid panel, keyboard workflow.
 """
 
+ASCII_SWAY_FANCY = """
+  ┌────────────────────────────────────────────────────────┐
+  │ [1] [2] [3] [4]                 12:00 PM  [󰁹 100%]    │  <- Waybar
+  │                                                        │
+  │   ┌───────────────────────────┐ ┌───────────────────┐  │
+  │   │   Kitty                  │ │ 󰈀 Firefox         │  │
+  │   │                           │ │                   │  │
+  │   │ $ fastfetch               │ │ (Mocha Theme)     │  │  <- Sway Gaps
+  │   │                           │ │                   │  │
+  │   └───────────────────────────┘ └───────────────────┘  │
+  │                                                        │
+  └────────────────────────────────────────────────────────┘
+  * Custom Gaps, Wayland-native compositing, drop-in i3 replacement.
+"""
+
+ASCII_SWAY_MIN = """
+  ┌────────────────────────────────────────────────────────┐
+  │ [1] [2] [3] [4]                 12:00 PM  [󰁹 100%]    │  <- Waybar
+  │                                                        │
+  │ ┌─────────────────────────────┐┌─────────────────────┐ │
+  │ │   Kitty                    ││ 󰈀 Firefox           │ │
+  │ │                             ││                     │ │
+  │ │ $ memory: 1.1GB/16GB        ││ (Tight tiling)      │ │
+  │ │                             ││                     │ │
+  │ └─────────────────────────────┘└─────────────────────┘ │
+  │                                                        │
+  └────────────────────────────────────────────────────────┘
+  * Minimalist Sway setup, optimized tiling, native Wayland.
+"""
+
 # Options Data Structure
 OPTIONS = [
     {
@@ -159,6 +189,22 @@ OPTIONS = [
         "features": "Solid panel, box wireframe window movements, maximum desktop speed",
         "script": "xfce/minimalist-config/install.py",
         "ascii": ASCII_XFCE_MIN
+    },
+    {
+        "name": "Sway Window Manager (Fancy Build)",
+        "type": "Wayland WM",
+        "compositor": "Sway (Built-in)",
+        "features": "Custom gaps, Waybar, Wayland native, zero screen tearing",
+        "script": "sway-dots/fancy-config/install.py",
+        "ascii": ASCII_SWAY_FANCY
+    },
+    {
+        "name": "Sway Window Manager (Minimalist Build)",
+        "type": "Wayland WM",
+        "compositor": "Sway (Built-in)",
+        "features": "No gaps, sharp edges, native Wayland, maximum battery",
+        "script": "sway-dots/minimalist-config/install.py",
+        "ascii": ASCII_SWAY_MIN
     }
 ]
 

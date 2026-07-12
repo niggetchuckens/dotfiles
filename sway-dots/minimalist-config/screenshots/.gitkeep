@@ -1,0 +1,17 @@
+# Screenshots Directory
+
+Add the following screenshots to complete the README:
+
+1. **desktop.png** - Full desktop view showing Hyprland with open windows
+2. **rofi.png** - Rofi application launcher in action
+3. **terminal.png** - Kitty terminal with your shell prompt
+4. **waybar.png** - Close-up of the waybar status bar
+5. **neovim.png** - Neovim with your configuration
+
+## Screenshot Tips
+
+- Use `grim` for full screenshots: `grim ~/screenshot.png`
+- Use `grim` with `slurp` for area selection: `grim -g "$(slurp)" ~/screenshot.png`
+- Recommended resolution: 1920x1080 or higher
+- Show your actual workflow and customizations
+- Consider adding a clean desktop shot and one with active applications
